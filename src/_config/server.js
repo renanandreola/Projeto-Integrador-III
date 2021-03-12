@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 const restify = require('restify');
-const mongoose = require('mongoose');
 const md5 = require('md5');
 
 module.exports = () => {

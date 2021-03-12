@@ -17,6 +17,7 @@
     "md5": "^2.3.0",
     "mongoose": "^5.11.19",
     "nunjucks": "^3.2.3",
+    "pg": "^8.5.1",
     "restify": "^8.5.1",
     "useful-nunjucks-filters": "^0.1.3"
   },
