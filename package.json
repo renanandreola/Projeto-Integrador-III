@@ -18,7 +18,9 @@
     "mongoose": "^5.11.19",
     "nunjucks": "^3.2.3",
     "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
     "restify": "^8.5.1",
+    "sequelize": "^6.5.0",
     "useful-nunjucks-filters": "^0.1.3"
   },
   "devDependencies": {
