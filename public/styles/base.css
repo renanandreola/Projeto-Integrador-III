@@ -1,3 +1,69 @@
+body, html {
+    height: 100%;
+}
+
+.menu {
+    display: flex;
+    background-color: blueviolet;
+    height: 50px;
+    width: 100%;
+    border-radius: 8px 8px 8px 8px;
+}
+
+.navigation {
+    display: contents;
+}
+
+a:hover {
+    color: black!important;
+    text-decoration: none!important;
+    border: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.navigation-item-princ {
+    color: white;
+    font-weight: bold;
+}
+
+.navigation-item {
+    color: white;
+    font-weight: 600;
+}
+
+.start-block {
+    display: flex;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.index-block {
+    display: flex;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.clients-block {
+    display: flex;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.orders-block {
+    display: flex;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
 .footer {
     background-color: gray;
 }
