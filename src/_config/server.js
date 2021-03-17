@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 const restify = require('restify');
 const md5 = require('md5');
+const jquery = require('jquery');
+const handlebars = require('handlebars');
 
 module.exports = () => {
     var port = process.env.port || 3000;
