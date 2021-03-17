@@ -8,7 +8,7 @@ const sequelize = new Sequelize('gvcsolaf', 'gvcsolaf', 'LgAsf5hL2prm6mQzw3sCQ0V
 sequelize.authenticate().then(function(){
     console.log("[CONNECTED AT POSTGRESQL]");
 }).catch(function(error){
-    console.log("Fail to Connect: " + error);
+    console.log("Fail to Connect to Postgres: " + error);
 });
 
 module.exports = {
