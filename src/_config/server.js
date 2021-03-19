@@ -33,9 +33,20 @@ module.exports = () => {
     //
     
     //ROUTES
-    app.get('/', (req,res) => {
-        res.redirect('/admin');
-    });
-    app.use('/admin', admin);
-    //
+        // inicial page
+        app.get('/', (req,res) => {
+            res.redirect('/admin');
+        });
+        app.use('/admin', admin)
+
+        // register clients
+        app.get('/register', (req, res) => {
+            res.redirect('/admin/register');
+        });
+
+        // register orders
+        app.get('/orders', (req, res) => {
+            res.redirect('/admin/orders');
+        });
+
 }

@@ -2,12 +2,22 @@ body, html {
     height: 100%;
 }
 
+.global {
+    display: flex;
+    height: 90%;
+}
+
+.content {
+    width: 100%;
+}
+
 .menu {
     display: flex;
-    background-color: blueviolet;
-    height: 50px;
-    width: 100%;
+    background-color: rgb(29,161,242);
+    height: 100%;
+    width: 18%;
     border-radius: 8px 8px 8px 8px;
+    flex-direction: column;
 }
 
 .navigation {
@@ -24,46 +34,68 @@ a:hover {
     padding-right: 4px;
     border-radius: 10px;
     background-color: white;
+    width: 100%;
+    text-align: center;
 }
 
 .navigation-item-princ {
     color: white;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .navigation-item {
     color: white;
     font-weight: 600;
+    font-size: 18px;
 }
 
 .start-block {
     display: flex;
-    width: 25%;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    height: 15%;
 }
 
 .index-block {
     display: flex;
-    width: 25%;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 5%;
 }
 
 .clients-block {
     display: flex;
-    width: 25%;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 5%;
 }
 
 .orders-block {
     display: flex;
-    width: 25%;
+    width: 100%;
     justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 5%;
 }
 
 .footer {
-    background-color: gray;
+    background-color: #e1f9ff;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.text-center-uri {
+    font-family: serif;
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
 }
