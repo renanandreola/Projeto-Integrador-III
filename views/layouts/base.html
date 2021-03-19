@@ -20,6 +20,7 @@
 
     </head>
     <body>
+      <div class="global">
         <div class="menu">
           <!-- LOCAL DE NAVEGAÇÃO DO SITE -->
           <div class="start-block">
@@ -39,23 +40,25 @@
           </div>
           <div class="orders-block">
             <p class="navigation">
-              <a class="navigation-item" href="#">Cadastrar Pedidos</a>
+              <a class="navigation-item" href="/orders">Cadastrar Pedidos</a>
             </p>
           </div>
         </div>
 
-        <div class="">
+        <div class="content">
             <!-- Conteúdo do Index -->
             {% block content %} 
             
             {% endblock %}
         </div>
+      </div>
             
         <!-- RODAPÉ -->
         <footer class="footer">
-            <div class="">
-                <p class="text-center">Footer aqui</p>
-            </div>
+          <div class="text-center text-muted">
+            <p class="small">Lazzarotto - Comércio de peças e assistência técnica <i class="fas fa-copyright"></i>Todos direitos reservados</p>
+          </div>
+          <p class="text-center-uri">LTMAQ LAZZAROTTO - CIÊNCIA DA COMPUTAÇÃO - URI</p>
         </footer>
         
         <!-- scripts -->
