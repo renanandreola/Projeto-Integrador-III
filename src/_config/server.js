@@ -6,6 +6,7 @@ const restify = require('restify');
 const md5 = require('md5');
 const jquery = require('jquery');
 const handlebars = require('handlebars');
+const admin = require('../routes/admin');
 
 module.exports = () => {
     var port = process.env.port || 3000;
@@ -31,13 +32,10 @@ module.exports = () => {
     app.use(express.static('public'));
     //
     
-    //PÁGINAS
-    app.get('/', (req, res) => {
-        res.render('index.html');
+    //ROUTES
+    app.get('/', (req,res) => {
+        res.redirect('/admin');
     });
-    
-    app.get('/register', (req, res) => {
-        res.render('register.html');
-    });  
+    app.use('/admin', admin);
     //
 }
