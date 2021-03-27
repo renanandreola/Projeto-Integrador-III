@@ -13,42 +13,43 @@
       <div class="div-label">
         <label for="order-number" class="">Número do pedido: </label>
       </div>
-      <input class="input-order" type="text" name="order-number" id="order-number" class="" required>
+      <input class="input-order" type="number" name="order-number" id="order-number" class="" required onclick="removeInputError()">
     </div>
     
     <div class="div-order">
       <div class="div-label">
         <label for="order-hour" class="">Hora do pedido: </label>
       </div>
-      <input class="input-order" type="text" name="order-hour" id="order-hour" class="" required>
+      <input class="input-order" type="text" name="order-hour" id="order-hour" class="" required onclick="removeInputError()">
     </div>
     
     <div class="div-order">
       <div class="div-label">
         <label for="client-name" class="">Nome do cliente: </label>
       </div>
-      <input class="input-order" type="text" name="client-name" id="client-name" class="" required>
+      <input class="input-order" type="text" name="client-name" id="client-name" class="" required onclick="removeInputError()">
     </div>
     
     <div class="div-order">
       <div class="div-label">
         <label for="service-type" class="">Tipo do serviço: </label>
       </div>
-      <input class="input-order" type="text" name="service-type" id="service-type" class="" required>
+      <input class="input-order" type="text" name="service-type" id="service-type" class="" required onclick="removeInputError()">
     </div>
     
     <div class="div-order">
       <div class="div-label">
         <label for="machine-type" class="">Tipo da máquina: </label>
       </div>
-      <input class="input-order" type="text" name="machine-type" id="machine-type" class="">
+      <input class="input-order" type="text" name="machine-type" id="machine-type" class="" required onclick="removeInputError()">
     </div>
     
     <div class="div-order">
       <div class="div-label">
         <label for="order-description" class="">Descrição do serviço: </label>
       </div>
-      <input class="input-order" type="text" name="order-description" id="order-description" class="" required>
+      <textarea name="order-description" id="order-description" cols="30" rows="3" required onclick="removeInputError()"></textarea>
+      <!-- <input class="input-order" type="text" name="order-description" id="order-description" class="" required> -->
     </div>
     
     <hr>

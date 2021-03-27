@@ -13,7 +13,7 @@
 .div-order {
     display: flex;
     flex-direction: column;
-    height: 80px;
+    /* height: 80px; */
     font-family: serif;
     width: 80%;
 }
@@ -41,4 +41,9 @@
     font-weight: bold;
     width: 20%;
     font-size: 18px;
+}
+
+.error-input {
+    border: 1px solid red;
+    /* background-color: rgb(243, 148, 148); */
 }
