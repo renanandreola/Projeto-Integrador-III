@@ -16,5 +16,22 @@ toastr.options = {
   "hideMethod": "fadeOut"
 };
 
+//Menu Push
+function wrap()
+{
+  if(document.getElementById("menu").style.left == "0px")
+  {
+    document.getElementById("menu").style.left = "-250px";
+    document.getElementById("content").style.marginLeft = "0";
+    document.getElementById("footer").style.marginLeft = "0";
+  }
+  else
+  {
+    document.getElementById("menu").style.left = "0px";
+    document.getElementById("content").style.marginLeft = "15%";
+    document.getElementById("footer").style.marginLeft = "15%";
+  } 
+}
+
 //
 console.log("base.js");

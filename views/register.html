@@ -5,79 +5,83 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="display-4 text-center" id="teste">Cadastrar Clientes</h1>
 
-<label for="name" class="">Nome: </label>
-<input type="text" name="name" id="name" class="" required>
+  <div class="main">
 
-<label for="lastname" class="">Sobrenome: </label>
-<input type="text" name="lastname" id="lastname" class="" required>
+    <h1 id="title">Cadastrar Clientes</h1>
 
-<label for="email" class="">E-mail: </label>
-<input type="text" name="email" id="email" class="" required>
+    <label for="name" class="">Nome: </label>
+    <input type="text" name="name" id="name" class="" required>
 
-<label for="phone" class="">Telefone: </label>
-<input type="number" name="phone" id="phone" class="" required>
+    <label for="lastname" class="">Sobrenome: </label>
+    <input type="text" name="lastname" id="lastname" class="" required>
 
-<label for="phone" class="">Telefone: </label>
-<input type="number" name="phone" id="phone" class="">
+    <label for="email" class="">E-mail: </label>
+    <input type="text" name="email" id="email" class="" required>
 
-<label for="cell" class="">Celular: </label>
-<input type="number" name="cell" id="cell" class="" required>
+    <label for="phone" class="">Telefone: </label>
+    <input type="number" name="phone" id="phone" class="" required>
 
-<label for="cep" class="">CEP: </label>
-<input type="number" name="cep" id="cep" class="" required>
+    <label for="phone" class="">Telefone: </label>
+    <input type="number" name="phone" id="phone" class="">
 
-<label for="state" class="">Estado: </label>
-<select name="state" id="state" class="" required>
-  <option value="AC">Acre</option>
-  <option value="AL">Alagoas</option>
-  <option value="AP">Amapá</option>
-  <option value="AM">Amazonas</option>
-  <option value="BA">Bahia</option>
-  <option value="CE">Ceará</option>
-  <option value="DF">Distrito Federal</option>
-  <option value="ES">Espírito Santo</option>
-  <option value="GO">Goiás</option>
-  <option value="MA">Maranhão</option>
-  <option value="MT">Mato Grosso</option>
-  <option value="MS">Mato Grosso do Sul</option>
-  <option value="MG">Minas Gerais</option>
-  <option value="PA">Pará</option>
-  <option value="PB">Paraíba</option>
-  <option value="PR">Paraná</option>
-  <option value="PE">Pernambuco</option>
-  <option value="PI">Piauí</option>
-  <option value="RJ">Rio de Janeiro</option>
-  <option value="RN">Rio Grande do Norte</option>
-  <option value="RS">Rio Grande do Sul</option>
-  <option value="RO">Rondônia</option>
-  <option value="RR">Roraima</option>
-  <option value="SC">Santa Catarina</option>
-  <option value="SP">São Paulo</option>
-  <option value="SE">Sergipe</option>
-  <option value="TO">Tocantins</option>
-  <option value="OT">Outro</option>
-</select>
+    <label for="cell" class="">Celular: </label>
+    <input type="number" name="cell" id="cell" class="" required>
 
-<label for="city" class="">Cidade: </label>
-<input type="text" name="city" id="city" class="" required>
+    <label for="cep" class="">CEP: </label>
+    <input type="number" name="cep" id="cep" class="" required>
 
-<label for="district" class="">Bairro: </label>
-<input type="text" name="district" id="district" class="" required>
+    <label for="state" class="">Estado: </label>
+    <select name="state" id="state" class="" required>
+      <option value="AC">Acre</option>
+      <option value="AL">Alagoas</option>
+      <option value="AP">Amapá</option>
+      <option value="AM">Amazonas</option>
+      <option value="BA">Bahia</option>
+      <option value="CE">Ceará</option>
+      <option value="DF">Distrito Federal</option>
+      <option value="ES">Espírito Santo</option>
+      <option value="GO">Goiás</option>
+      <option value="MA">Maranhão</option>
+      <option value="MT">Mato Grosso</option>
+      <option value="MS">Mato Grosso do Sul</option>
+      <option value="MG">Minas Gerais</option>
+      <option value="PA">Pará</option>
+      <option value="PB">Paraíba</option>
+      <option value="PR">Paraná</option>
+      <option value="PE">Pernambuco</option>
+      <option value="PI">Piauí</option>
+      <option value="RJ">Rio de Janeiro</option>
+      <option value="RN">Rio Grande do Norte</option>
+      <option value="RS">Rio Grande do Sul</option>
+      <option value="RO">Rondônia</option>
+      <option value="RR">Roraima</option>
+      <option value="SC">Santa Catarina</option>
+      <option value="SP">São Paulo</option>
+      <option value="SE">Sergipe</option>
+      <option value="TO">Tocantins</option>
+      <option value="OT">Outro</option>
+    </select>
 
-<label for="address" class="">Endereço: </label>
-<input type="text" name="address" id="address" class="" required>
+    <label for="city" class="">Cidade: </label>
+    <input type="text" name="city" id="city" class="" required>
 
-<label for="number" class="">Número: </label>
-<input type="number" name="number" id="number" class="" required>
+    <label for="district" class="">Bairro: </label>
+    <input type="text" name="district" id="district" class="" required>
 
-<label for="complement" class="">Bairro: </label>
-<input type="text" name="complement" id="complement" class="" required>
+    <label for="address" class="">Endereço: </label>
+    <input type="text" name="address" id="address" class="" required>
+
+    <label for="number" class="">Número: </label>
+    <input type="number" name="number" id="number" class="" required>
+
+    <label for="complement" class="">Bairro: </label>
+    <input type="text" name="complement" id="complement" class="" required>
+  </div>
 
 {% endblock %}
 
 {% block script %}
   <script src="/js/register.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="styles/register.css">
+  <link rel="stylesheet" href="/styles/register.css">
 {% endblock %}
