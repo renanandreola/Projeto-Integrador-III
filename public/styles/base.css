@@ -80,24 +80,6 @@ a:hover {
     height: 5%;
 }
 
-.clients-block {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    justify-content: center;
-    height: 5%;
-}
-
-.orders-block {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    justify-content: center;
-    height: 5%;
-}
-
 .footer {
     background-color: #e1f9ff;
     height: 10%;

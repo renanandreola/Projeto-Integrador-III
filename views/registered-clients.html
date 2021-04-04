@@ -1,0 +1,57 @@
+{% extends './layouts/base.html' %}
+
+{% block title %}
+    Clientes Cadastrados
+{% endblock %}
+
+{% block content %}
+
+<div class="div-title-registered-clients">
+  <h1 class="text-center" id="title-page-registered-clients">Clientes Cadastrados</h1>
+</div>
+
+<div>
+  <table class="">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Sobrenome</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Celular</th>
+        <th scope="col">CEP</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Endereço</th>
+        <th scope="col">Número</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1234</td>
+        <td>Renan</td>
+        <td>Andreolla</td>
+        <td>renanandreolla@teste.com</td>
+        <td>(54)99999-9999</td>
+        <td>(54)99999-9999</td>
+        <td>99700-000</td>
+        <td>RS</td>
+        <td>Erechim</td>
+        <td>Bairro centro</td>
+        <td>Rua teste</td>
+        <td>1234</td>
+        <td><button class="" id="">Excluir</button></td>
+        <td><button class="" id="">Editar</button></td>
+      </tr>
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block script %}
+  <script src="/js/registered-clients.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/registered-clients.css">
+{% endblock %}

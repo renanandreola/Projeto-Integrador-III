@@ -5,9 +5,12 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="display-4 text-center" id="teste">Cadastrar Pedidos</h1>
 
-<div class="teste">
+<div class="div-title-page-orders">
+  <h1 class="text-center" id="title-page-orders">Cadastrar Pedidos</h1>
+</div>
+
+<div class="start-div">
   <div class="form-orders">
     <div class="div-order">
       <div class="div-label">
@@ -48,7 +51,7 @@
       <div class="div-label">
         <label for="order-description" class="">Descrição do serviço: </label>
       </div>
-      <textarea name="order-description" id="order-description" cols="30" rows="3" required onclick="removeInputError()"></textarea>
+      <textarea name="order-description" id="order-description" cols="30" rows="4" required onclick="removeInputError()"></textarea>
       <!-- <input class="input-order" type="text" name="order-description" id="order-description" class="" required> -->
     </div>
     
@@ -59,7 +62,6 @@
     </div>
   </div>
 </div>
-
 
 {% endblock %}
 

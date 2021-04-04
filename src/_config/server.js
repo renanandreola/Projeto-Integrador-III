@@ -49,4 +49,13 @@ module.exports = () => {
             res.redirect('/admin/orders');
         });
 
+        // Registered orders
+        app.get('/registered-orders', (req, res) => {
+            res.redirect('/admin/registered-orders');
+        });
+
+        // Registered clients
+        app.get('/registered-clients', (req, res) => {
+            res.redirect('/admin/registered-clients');
+        });
 }

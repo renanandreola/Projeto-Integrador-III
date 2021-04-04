@@ -1,4 +1,17 @@
-.teste {
+.div-title-page-orders {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#title-page-orders {
+    font-size: 25px;
+    color: rgb(0, 98, 190);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.start-div {
     display: flex;
     width: 100%;
 }
@@ -41,6 +54,7 @@
     font-weight: bold;
     width: 20%;
     font-size: 18px;
+    margin-bottom: 25px;
 }
 
 .error-input {
