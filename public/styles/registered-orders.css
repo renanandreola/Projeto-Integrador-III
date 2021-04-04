@@ -1,0 +1,12 @@
+.div-title-registered-orders {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#title-page-registered-orders {
+    font-size: 25px;
+    color: rgb(0, 98, 190);
+    font-family: Arial, Helvetica, sans-serif;
+}

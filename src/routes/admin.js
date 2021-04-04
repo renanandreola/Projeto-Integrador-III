@@ -13,4 +13,12 @@ app.get('/orders', (req, res) => {
     res.render('orders.html');
 }); 
 
+app.get('/registered-orders', (req, res) => {
+    res.render('registered-orders.html');
+}); 
+
+app.get('/registered-clients', (req, res) => {
+    res.render('registered-clients.html');
+}); 
+
 module.exports = app;

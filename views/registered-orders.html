@@ -1,0 +1,47 @@
+{% extends './layouts/base.html' %}
+
+{% block title %}
+    Pedidos Cadastrados
+{% endblock %}
+
+{% block content %}
+
+<div class="div-title-registered-orders">
+  <h1 class="text-center" id="title-page-registered-orders">Pedidos Cadastrados</h1>
+</div>
+
+<div>
+  <table class="">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Número do pedido</th>
+        <th scope="col">Hora do pedido</th>
+        <th scope="col">Nome do cliente</th>
+        <th scope="col">Tipo do serviço</th>
+        <th scope="col">Tipo da máquina</th>
+        <th scope="col">Descrição do serviço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1234</td>
+        <td>12314</td>
+        <td>12:12</td>
+        <td>Renan Andreolla</td>
+        <td>Ajuste mangueira alta pressão</td>
+        <td>Lava-jato</td>
+        <td>Ajustes teste teste teste</td>
+        <td><button class="" id="">Excluir</button></td>
+        <td><button class="" id="">Editar</button></td>
+      </tr>
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block script %}
+  <script src="/js/registered-orders.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/registered-orders.css">
+{% endblock %}

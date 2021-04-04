@@ -10,40 +10,41 @@ var orderDescription = $("#order-description");
 orderHour.mask("99:99");
 
 function sendData() {
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
 
     if(orderNumber.val() == "") {
         orderNumber.addClass("error-input");
-        toastr["error"]("Número do pedido obrigatório");
+        toastr["error"]("Número do pedido inválido");
         return;
     }
 
     if(orderHour.val() == "") {
         orderHour.addClass("error-input");
-        toastr["error"]("Hora do pedido obrigatória");
+        toastr["error"]("Hora do pedido inválido");
         return;
     }
 
-    if(clientName.val() == "") {
+    if(clientName.val() == "" || validateInput.test(clientName.val()) == true) {
         clientName.addClass("error-input");
-        toastr["error"]("Nome do cliente obrigatório");
+        toastr["error"]("Nome do cliente inválido");
         return;
     }
 
-    if(serviceType.val() == "") {
+    if(serviceType.val() == "" || validateInput.test(serviceType.val()) == true) {
         serviceType.addClass("error-input");
-        toastr["error"]("Tipo do serviço obrigatório");
+        toastr["error"]("Tipo do serviço inválido");
         return;
     }
 
-    if(machineType.val() == "") {
+    if(machineType.val() == "" || validateInput.test(machineType.val()) == true) {
         machineType.addClass("error-input");
-        toastr["error"]("Tipo da máquina obrigatório");
+        toastr["error"]("Tipo da máquina inválido");
         return;
     }
 
-    if(orderDescription.val() == "") {
+    if(orderDescription.val() == "" || validateInput.test(orderDescription.val()) == true) {
         orderDescription.addClass("error-input");
-        toastr["error"]("Descrição do serviço obrigatória");
+        toastr["error"]("Descrição do serviço inválida");
         return;
     }
 
