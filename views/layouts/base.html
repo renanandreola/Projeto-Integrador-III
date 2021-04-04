@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <title>
             {% block title%} 
-            
+
             {% endblock %}
         </title>
         
@@ -20,8 +20,11 @@
 
     </head>
     <body>
+      <div class="header">
+        <img src="/img/menu.svg" alt="MENU" id="menu-button" width="3%" ondragstart="return false" onclick="wrap();"/>
+      </div>
       <div class="global">
-        <div class="menu">
+        <div class="menu" id="menu" style="left: -250px; transition: left 250ms ease 0s;">
           <!-- LOCAL DE NAVEGAÇÃO DO SITE -->
           <div class="start-block">
             <p class="navigation">
@@ -45,7 +48,7 @@
           </div>
         </div>
 
-        <div class="content">
+        <div class="content" id="content" style="margin-left: 0; transition: margin-left 300ms ease 0s" >
             <!-- Conteúdo do Index -->
             {% block content %} 
             
@@ -54,9 +57,9 @@
       </div>
             
         <!-- RODAPÉ -->
-        <footer class="footer">
+        <footer class="footer" id="footer" style="margin-left: 0; transition: margin-left 300ms ease 0s">
           <div class="text-center text-muted">
-            <p class="small">Lazzarotto - Comércio de peças e assistência técnica <i class="fas fa-copyright"></i>Todos direitos reservados</p>
+            <p class="small">Lazzarotto - Comércio de Peças e a Assistência Técnica <i class="fas fa-copyright"></i> Todos direitos reservados</p>
           </div>
           <p class="text-center-uri">LTMAQ LAZZAROTTO - CIÊNCIA DA COMPUTAÇÃO - URI</p>
         </footer>
