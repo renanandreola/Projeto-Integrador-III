@@ -82,10 +82,13 @@ a:hover {
 
 .footer {
     background-color: #e1f9ff;
-    height: 10%;
+    height: 5%;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
 }
 
 .text-center-uri {
@@ -93,4 +96,8 @@ a:hover {
     font-size: 12px;
     justify-content: center;
     text-align: center;
+}
+
+.small {
+    margin-bottom: 0;
 }
