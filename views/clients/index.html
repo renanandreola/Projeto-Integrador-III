@@ -1,4 +1,4 @@
-{% extends './layouts/base.html' %}
+{% extends '../layouts/base.html' %}
 
 {% block title %}
     Clientes Cadastrados
@@ -8,6 +8,8 @@
 
 <div class="div-title-registered-clients">
   <h1 class="text-center" id="title-page-registered-clients">Clientes Cadastrados</h1>
+  <br>
+  <a href="/admin/clients/add">Adicionar Cliente</a>
 </div>
 
 <div>
@@ -98,6 +100,6 @@
 {% endblock %}
 
 {% block script %}
-  <script src="/js/registered-clients.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="/styles/registered-clients.css">
+  <script src="/js/clients/index.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/clients/index.css">
 {% endblock %}
