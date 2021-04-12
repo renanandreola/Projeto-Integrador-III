@@ -1,24 +1,48 @@
 const express = require('express');
+const Order = require('../models/Order');
+const bodyParser = require('body-parser');
 const app = express.Router();
+
+//BodyParser
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.render('index.html');
 });
 
-app.get('/register', (req, res) => {
-    res.render('register.html');
+app.get('/clients', (req, res) => {
+    res.render('clients/index.html');
+});
+
+app.get('/clients/index', (req, res) => {
+    res.render('clients/index.html');
+}); 
+
+app.get('/clients/add', (req, res) => {
+    res.render('clients/add.html');
 }); 
 
 app.get('/orders', (req, res) => {
     res.render('orders.html');
 }); 
 
+app.post('/add', (req, res) => {
+    Order.create({
+        client_id: req.body.clientname,
+        service_type: req.body.servicetype,
+        machine_type: req.body.machinetype,
+        service_description: req.body.orderdescription
+    }).then(function() {
+        console.log("Cadastro efetuado com sucesso!");
+        res.redirect('/orders');
+    }).catch(function(error) {
+        res.send("Ocorreu um erro ao inserir este cadastro: " + error);
+    });
+});
+
 app.get('/registered-orders', (req, res) => {
     res.render('registered-orders.html');
-}); 
-
-app.get('/registered-clients', (req, res) => {
-    res.render('registered-clients.html');
 }); 
 
 module.exports = app;

@@ -6,9 +6,10 @@
 
 {% block content %}
 
-<div class="div-title-page-orders">
-  <h1 class="text-center" id="title-page-orders">Cadastrar Pedidos</h1>
-</div>
+<form action="/admin/add" method="post">
+  <div class="div-title-page-orders">
+    <h1 class="text-center" id="title-page-orders">Cadastrar Pedidos</h1>
+  </div>
 
 <div class="div-btn-send">
   <p>O cliente não possui cadastro? <a href="/register">Clique aqui!</a></p>
@@ -30,42 +31,41 @@
       <input class="input-order" type="text" name="order-hour" id="order-hour" class="" required onclick="removeInputError()">
     </div> -->
     
-    <div class="div-order">
-      <div class="div-label">
-        <label for="client-name" class="">Nome do cliente: </label>
+      <div class="div-order">
+        <div class="div-label">
+          <label for="client-name" class="">Nome do cliente: </label>
+        </div>
+        <input class="input-order" type="text" name="clientname" id="client-name" class="" required onclick="removeInputError()">
       </div>
-      <input class="input-order" type="text" name="client-name" id="client-name" class="" required onclick="removeInputError()">
-    </div>
-    
-    <div class="div-order">
-      <div class="div-label">
-        <label for="service-type" class="">Tipo do serviço: </label>
+      
+      <div class="div-order">
+        <div class="div-label">
+          <label for="service-type" class="">Tipo do serviço: </label>
+        </div>
+        <input class="input-order" type="text" name="servicetype" id="service-type" class="" required onclick="removeInputError()">
       </div>
-      <input class="input-order" type="text" name="service-type" id="service-type" class="" required onclick="removeInputError()">
-    </div>
-    
-    <div class="div-order">
-      <div class="div-label">
-        <label for="machine-type" class="">Tipo da máquina: </label>
+      
+      <div class="div-order">
+        <div class="div-label">
+          <label for="machine-type" class="">Tipo da máquina: </label>
+        </div>
+        <input class="input-order" type="text" name="machinetype" id="machine-type" class="" required onclick="removeInputError()">
       </div>
-      <input class="input-order" type="text" name="machine-type" id="machine-type" class="" required onclick="removeInputError()">
-    </div>
-    
-    <div class="div-order">
-      <div class="div-label">
-        <label for="order-description" class="">Descrição do serviço: </label>
+      
+      <div class="div-order">
+        <div class="div-label">
+          <label for="order-description" class="">Descrição do serviço: </label>
+        </div>
+        <textarea name="orderdescription" id="order-description" cols="30" rows="4" required onclick="removeInputError()"></textarea>
       </div>
-      <textarea name="order-description" id="order-description" cols="30" rows="4" required onclick="removeInputError()"></textarea>
-      <!-- <input class="input-order" type="text" name="order-description" id="order-description" class="" required> -->
-    </div>
+      
+      <hr>
     
-    <hr>
-  
-    <div class="div-btn-send">
-      <button class="btn-send" id="button-send" onclick="sendData()">Cadastrar Pedido</button>
-    </div>
+      <div class="div-btn-send">
+        <button class="btn-send" id="button-send" type="submit" onclick="sendData()">Cadastrar</button>
+      </div>
   </div>
-</div>
+</form>
 
 {% endblock %}
 
