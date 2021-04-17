@@ -6,6 +6,9 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+html {
+    height: 100%;
+}
 
 body {
     background: linear-gradient(45deg, #5db0ef, #157fd1);

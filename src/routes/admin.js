@@ -35,11 +35,11 @@ app.get('/clients/add', (req, res) => {
     res.render('clients/add.html');
 }); 
 
-app.get('/orders', (req, res) => {
-    res.render('orders.html');
+app.get('/orders/add', (req, res) => {
+    res.render('orders/add.html');
 }); 
 
-app.post('/add', (req, res) => {
+app.post('/orders/add', (req, res) => {
     Order.create({
         client_id: req.body.clientname,
         service_type: req.body.servicetype,
@@ -47,14 +47,18 @@ app.post('/add', (req, res) => {
         service_description: req.body.orderdescription
     }).then(function() {
         console.log("Cadastro efetuado com sucesso!");
-        res.redirect('/orders');
+        res.redirect('/orders/add');
     }).catch(function(error) {
         res.send("Ocorreu um erro ao inserir este cadastro: " + error);
     });
 });
 
-app.get('/registered-orders', (req, res) => {
-    res.render('registered-orders.html');
+app.get('/orders', (req, res) => {
+    res.render('orders/index.html');
+}); 
+
+app.get('/orders/index', (req, res) => {
+    res.render('orders/index.html');
 }); 
 
 module.exports = app;

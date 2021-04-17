@@ -8,13 +8,11 @@ const md5 = require('md5');
 const jquery = require('jquery');
 const handlebars = require('handlebars');
 const admin = require('../routes/admin');
+const flash = require('express-flash');
 const passport = require('passport');
 require('./auth')(passport);
-const flash = require('connect-flash');
-const User = require('../models/User');
 
 module.exports = () => {
-    User.findOne({where:{id: 1}}).then((user) => {console.log(user)});
     //Session
     app.use(session({
         secret: "ltmaqlazarotto",
@@ -28,10 +26,11 @@ module.exports = () => {
     app.use(flash());
 
     //Middleware
-    // app.use((req,res,next) => {
-    //     res.locals.success_msg = req.flash("success_msg");
-    //     res.locals.error_msg = req.flash("error_msg");
-    // });
+    app.use((req,res,next) => {
+        // res.locals.success_msg = req.flash("success_msg");
+        // res.locals.error_msg = req.flash("error_msg");
+        next();
+    });
 
     app.use(passport.initialize());
     app.use(passport.session());
@@ -77,15 +76,5 @@ module.exports = () => {
         // register orders
         app.get('/orders', (req, res) => {
             res.redirect('/admin/orders');
-        });
-
-        // Registered orders
-        app.get('/registered-orders', (req, res) => {
-            res.redirect('/admin/registered-orders');
-        });
-
-        // Registered clients
-        app.get('/registered-clients', (req, res) => {
-            res.redirect('/admin/registered-clients');
         });
 }
