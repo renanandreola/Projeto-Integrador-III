@@ -8,7 +8,6 @@ const md5 = require('md5');
 const jquery = require('jquery');
 const handlebars = require('handlebars');
 const admin = require('../routes/admin');
-const session = require('express-session');
 const passport = require('passport');
 require('./auth')(passport);
 const flash = require('connect-flash');
