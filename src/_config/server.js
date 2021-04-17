@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
@@ -31,6 +32,10 @@ module.exports = () => {
     }));
     app.use(express.static('public'));
     //
+
+    //SESSION
+    app.use(session({secret:'secret'}));
+    
     
     //ROUTES
         // inicial page

@@ -11,6 +11,14 @@ app.get('/', (req, res) => {
     res.render('index.html');
 });
 
+app.get('/login', (req, res) =>{
+    res.render('login.html');
+});
+
+app.post('/login', (req, res) =>{
+    res.send('logado');
+});
+
 app.get('/clients', (req, res) => {
     res.render('clients/index.html');
 });
