@@ -2,6 +2,7 @@ const express = require('express');
 const Order = require('../models/Order');
 const bodyParser = require('body-parser');
 const app = express.Router();
+const passport = require('passport');
 
 //BodyParser
 app.use(bodyParser.urlencoded({extended: false}));
@@ -11,13 +12,16 @@ app.get('/', (req, res) => {
     res.render('index.html');
 });
 
-app.get('/login', (req, res) =>{
+app.get('/login', (req, res) => {
     res.render('login.html');
 });
 
-app.post('/login', (req, res) =>{
-    res.send('logado');
-});
+app.post('/login', (req, res, next) => {
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/admin/login",
+    })(req,res,next);
+})
 
 app.get('/clients', (req, res) => {
     res.render('clients/index.html');

@@ -8,8 +8,33 @@ const md5 = require('md5');
 const jquery = require('jquery');
 const handlebars = require('handlebars');
 const admin = require('../routes/admin');
+const passport = require('passport');
+require('./auth')(passport);
+const flash = require('connect-flash');
+const User = require('../models/User');
 
 module.exports = () => {
+    User.findOne({where:{id: 1}}).then((user) => {console.log(user)});
+    //Session
+    app.use(session({
+        secret: "ltmaqlazarotto",
+        resave: true,
+        saveUninitialized: true
+    }));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.use(flash());
+
+    //Middleware
+    // app.use((req,res,next) => {
+    //     res.locals.success_msg = req.flash("success_msg");
+    //     res.locals.error_msg = req.flash("error_msg");
+    // });
+
+    app.use(passport.initialize());
+    app.use(passport.session());
     var port = process.env.port || 3000;
 
     let env = nunjucks.configure('views', {
