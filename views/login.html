@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    {% if messages.error %}
+        {{messages.error}}
+    {% endif %}
     <main class="container">
         <h2>Log in to your acount</h2>
         <form action="/admin/login" method="POST">

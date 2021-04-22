@@ -1,8 +1,30 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
 const express = require('express');
 const Order = require('../models/Order');
 const bodyParser = require('body-parser');
 const app = express.Router();
 const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
+const initializePassport = require('../_config/auth');
+initializePassport(passport);
+
+//FLASH
+app.use(flash());
+
+//SESSION
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+//PASSPORT
+app.use(passport.initialize());
+app.use(passport.session());
 
 //BodyParser
 app.use(bodyParser.urlencoded({extended: false}));
@@ -16,12 +38,13 @@ app.get('/login', (req, res) => {
     res.render('login.html');
 });
 
-app.post('/login', (req, res, next) => {
-    passport.authenticate("local", {
-        successRedirect: "/",
-        failureRedirect: "/admin/login",
-    })(req,res,next);
-})
+app.post('/login', passport.authenticate('local', {
+    failureRedirect: '/admin/login',
+    successRedirect: '/',
+    failureFlash: true
+}), (req, res, next) => {
+    res.redirect('/');
+});
 
 app.get('/clients', (req, res) => {
     res.render('clients/index.html');
@@ -47,7 +70,7 @@ app.post('/orders/add', (req, res) => {
         service_description: req.body.orderdescription
     }).then(function() {
         console.log("Cadastro efetuado com sucesso!");
-        res.redirect('/orders/add');
+        res.redirect('/orders');
     }).catch(function(error) {
         res.send("Ocorreu um erro ao inserir este cadastro: " + error);
     });

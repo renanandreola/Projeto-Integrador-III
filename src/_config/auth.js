@@ -1,44 +1,31 @@
-var passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
-const db = require('./database');
-
-//Model do usuário
+const LocalStrategy = require('passport-local').Strategy;
+const bcryptjs = require('bcryptjs');
+const database = require('../_config/database');
 const User = require('../models/User');
 
-module.exports = function(passport) {
-
-    passport.use(new localStrategy({
-        usernameField: 'email',
-        passwordField: 'password'
-    }, (email, password, done) => {
-        User.findOne({
-            where: {
-                email: email
-            }    
-        }).then((user) => {
+function initialize(passport) {
+    const authenticateUser = (email, password, done) => {
+        User.findOne({where: {email: email}}).then((user) => {
             if(!user) {
-                return done(null, false, {
-                    message: "Esta conta não existe"
-                })
+                return done(null, false, {message: "Credenciais Incorretas"});
             }
-            if(password == user.password)
-            {
-                return done(null, user);
-            } else {
-                return done(null, false, {
-                    message: "Senha Incorreta"
-                });
-            }
-        })
-    }));
 
-    passport.serializeUser((user, done) => {
-        done(null, user.id)
-    });
+            bcryptjs.compare(password, user.password, (error, confirm) => {
+                if(confirm) {
+                    return done(null, user);
+                } else {
+                    return done(null, false, {message: "Credenciais Incorretas"});
+                }
+            })
+        });
 
+    }
+
+    passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser));
+    passport.serializeUser((user, done) => done(null,user.id));
     passport.deserializeUser((id, done) => {
-        User.findByPk(id, (error, user) => {
-            done(error, user);
-        })
+        return done(null, User.findOne({where: {id: id}}));
     });
 }
+
+module.exports = initialize;
