@@ -6,78 +6,134 @@
 
 {% block content %}
 
-  <div class="main">
-
-    <h1 id="title">Cadastrar Clientes</h1>
-
-    <label for="name" class="">Nome: </label>
-    <input type="text" name="name" id="name" class="" required>
-
-    <label for="lastname" class="">Sobrenome: </label>
-    <input type="text" name="lastname" id="lastname" class="" required>
-
-    <label for="email" class="">E-mail: </label>
-    <input type="text" name="email" id="email" class="" required>
-
-    <label for="phone" class="">Telefone: </label>
-    <input type="number" name="phone" id="phone" class="" required>
-
-    <label for="phone" class="">Telefone: </label>
-    <input type="number" name="phone" id="phone" class="">
-
-    <label for="cell" class="">Celular: </label>
-    <input type="number" name="cell" id="cell" class="" required>
-
-    <label for="cep" class="">CEP: </label>
-    <input type="number" name="cep" id="cep" class="" required>
-
-    <label for="state" class="">Estado: </label>
-    <select name="state" id="state" class="" required>
-      <option value="AC">Acre</option>
-      <option value="AL">Alagoas</option>
-      <option value="AP">Amapá</option>
-      <option value="AM">Amazonas</option>
-      <option value="BA">Bahia</option>
-      <option value="CE">Ceará</option>
-      <option value="DF">Distrito Federal</option>
-      <option value="ES">Espírito Santo</option>
-      <option value="GO">Goiás</option>
-      <option value="MA">Maranhão</option>
-      <option value="MT">Mato Grosso</option>
-      <option value="MS">Mato Grosso do Sul</option>
-      <option value="MG">Minas Gerais</option>
-      <option value="PA">Pará</option>
-      <option value="PB">Paraíba</option>
-      <option value="PR">Paraná</option>
-      <option value="PE">Pernambuco</option>
-      <option value="PI">Piauí</option>
-      <option value="RJ">Rio de Janeiro</option>
-      <option value="RN">Rio Grande do Norte</option>
-      <option value="RS">Rio Grande do Sul</option>
-      <option value="RO">Rondônia</option>
-      <option value="RR">Roraima</option>
-      <option value="SC">Santa Catarina</option>
-      <option value="SP">São Paulo</option>
-      <option value="SE">Sergipe</option>
-      <option value="TO">Tocantins</option>
-      <option value="OT">Outro</option>
-    </select>
-
-    <label for="city" class="">Cidade: </label>
-    <input type="text" name="city" id="city" class="" required>
-
-    <label for="district" class="">Bairro: </label>
-    <input type="text" name="district" id="district" class="" required>
-
-    <label for="address" class="">Endereço: </label>
-    <input type="text" name="address" id="address" class="" required>
-
-    <label for="number" class="">Número: </label>
-    <input type="number" name="number" id="number" class="" required>
-
-    <label for="complement" class="">Bairro: </label>
-    <input type="text" name="complement" id="complement" class="" required>
+  <div class="div-title-page-clients">
+    <h1 class="text-center" id="title-page-clients">Cadastrar Clientes</h1>
   </div>
+
+<div class="start-div">
+  <div class="form-clients">
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="name" class="">Nome: </label>
+      </div>
+      <input type="text" name="name" id="name" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="lastname" class="">Sobrenome: </label>
+      </div>
+      <input type="text" name="lastname" id="lastname" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="email" class="">E-mail: </label>
+      </div>
+      <input type="email" name="email" id="email" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="phone" class="">Telefone: </label>
+      </div>
+      <input type="text" name="phone" id="phone" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="cell" class="">Celular: </label>
+      </div>
+      <input type="text" name="cell" id="cell" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="cep" class="">CEP: </label>
+      </div>
+      <input type="text" name="cep" id="cep" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="state" class="">Estado: </label>
+      </div>
+      <select name="state" id="state" class="input-client">
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+        <option value="OT">Outro</option>
+      </select>
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="city" class="">Cidade: </label>
+      </div>
+      <input type="text" name="city" id="city" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="district" class="">Bairro: </label>
+      </div>
+      <input type="text" name="district" id="district" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="address" class="">Endereço: </label>
+      </div>
+      <input type="text" name="address" id="address" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="number" class="">Número: </label>
+      </div>
+      <input type="number" name="number" id="number" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <div class="div-clients">
+      <div class="div-label">
+        <label for="complement" class="">Complemento: </label>
+      </div>
+      <input type="text" name="complement" id="complement" class="input-client" onclick="removeInputError()">
+    </div>
+
+    <hr>
+    
+    <div class="div-btn-send">
+      <button class="btn-send" id="button-send-client" type="button" onclick="sendClientData()">Cadastrar</button>
+    </div>
+  
+  </div>
+</div>
 
 {% endblock %}
 
