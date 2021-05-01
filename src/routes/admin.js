@@ -11,6 +11,7 @@ const flash = require('express-flash');
 const session = require('express-session');
 const initializePassport = require('../_config/auth');
 initializePassport(passport);
+const {isAdmin} = require('../helpers/isAdmin');
 
 //FLASH
 app.use(flash());
@@ -26,12 +27,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//MIDDLEWARE
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 //BodyParser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get('/', isAdmin, (req, res) => {
     res.render('index.html');
+    console.log(req);
 });
 
 app.get('/login', (req, res) => {
@@ -46,23 +54,23 @@ app.post('/login', passport.authenticate('local', {
     res.redirect('/');
 });
 
-app.get('/clients', (req, res) => {
+app.get('/clients', isAdmin, (req, res) => {
     res.render('clients/index.html');
 });
 
-app.get('/clients/index', (req, res) => {
+app.get('/clients/index', isAdmin, (req, res) => {
     res.render('clients/index.html');
 }); 
 
-app.get('/clients/add', (req, res) => {
+app.get('/clients/add', isAdmin, (req, res) => {
     res.render('clients/add.html');
 }); 
 
-app.get('/orders/add', (req, res) => {
+app.get('/orders/add', isAdmin, (req, res) => {
     res.render('orders/add.html');
 }); 
 
-app.post('/orders/add', (req, res) => {
+app.post('/orders/add',  isAdmin, (req, res) => {
     Order.create({
         client_id: req.body.clientname,
         service_type: req.body.servicetype,
@@ -76,11 +84,11 @@ app.post('/orders/add', (req, res) => {
     });
 });
 
-app.get('/orders', (req, res) => {
+app.get('/orders', isAdmin, (req, res) => {
     res.render('orders/index.html');
 }); 
 
-app.get('/orders/index', (req, res) => {
+app.get('/orders/index', isAdmin, (req, res) => {
     res.render('orders/index.html');
 }); 
 
