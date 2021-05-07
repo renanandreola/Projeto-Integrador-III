@@ -70,17 +70,56 @@ app.get('/orders/add', isAdmin, (req, res) => {
     res.render('orders/add.html');
 }); 
 
-app.post('/orders/add',  isAdmin, (req, res) => {
+app.post('/orders/add', isAdmin, (req, res) => {
+
+    var clientName = req.body.clientname;
+    var serviceType = req.body.servicetype;
+    var machineType = req.body.machinetype;
+    var orderDescription = req.body.orderdescription;
+
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+
+    if(clientName == "" || validateInput.test(clientName) == true) {
+        req.flash('error', 'Nome do cliente inválido!');
+        return sendRequestData('clientName');
+    }
+
+    if(serviceType == "" || validateInput.test(serviceType) == true) {
+        req.flash('error', 'Nome do serviço inválido!');
+        return sendRequestData('serviceType');
+    }
+
+    if(machineType == "" || validateInput.test(machineType) == true) {
+        req.flash('error', 'Nome da máquina inválida!');
+        return sendRequestData('machineType');
+    }
+
+    if(orderDescription == "" || validateInput.test(orderDescription) == true) {
+        req.flash('error', 'Descrição do pedido inválida!');
+        return sendRequestData('orderDescription');
+    }
+
+    function sendRequestData(input) {
+        return res.render('orders/add.html', {
+            client: clientName,
+            service: serviceType,
+            machine: machineType,
+            order: orderDescription,
+            input: input
+        });
+    }
+    
     Order.create({
-        client_id: req.body.clientname,
-        service_type: req.body.servicetype,
-        machine_type: req.body.machinetype,
-        service_description: req.body.orderdescription
+        client_id: clientName,
+        service_type: serviceType,
+        machine_type: machineType,
+        service_description: orderDescription
     }).then(function() {
-        console.log("Cadastro efetuado com sucesso!");
+        req.flash('success', 'Pedido cadastrado com sucesso');
         res.redirect('/orders');
     }).catch(function(error) {
-        res.send("Ocorreu um erro ao inserir este cadastro: " + error);
+        req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
+        res.redirect('/orders');
     });
 });
 
