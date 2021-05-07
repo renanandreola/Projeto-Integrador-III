@@ -24,7 +24,7 @@
     "jquery": "^3.6.0",
     "jquery-mask-plugin": "^1.14.16",
     "md5": "^2.3.0",
-    "mongoose": "^5.11.19",
+    "mongoose": "^5.12.5",
     "nunjucks": "^3.2.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
