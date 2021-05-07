@@ -17,52 +17,39 @@
 
 <div class="start-div">
   <div class="form-orders">
-    <!-- <div class="div-order">
-      <div class="div-label">
-        <label for="order-number" class="">Número do pedido: </label>
-      </div>
-      <input class="input-order" type="number" name="order-number" id="order-number" class="" required onclick="removeInputError()">
-    </div> -->
-    
-    <!-- <div class="div-order">
-      <div class="div-label">
-        <label for="order-hour" class="">Hora do pedido: </label>
-      </div>
-      <input class="input-order" type="text" name="order-hour" id="order-hour" class="" required onclick="removeInputError()">
-    </div> -->
-    
       <div class="div-order">
+
         <div class="div-label">
           <label for="client-name" class="">Nome do cliente: </label>
         </div>
-        <input class="input-order" type="text" name="clientname" id="client-name" class="" required onclick="removeInputError()">
+        <input class="input-order" type="text" name="clientname" id="client-name" class="" onclick="removeInputError()" value = {{client}}>
       </div>
       
       <div class="div-order">
         <div class="div-label">
           <label for="service-type" class="">Tipo do serviço: </label>
         </div>
-        <input class="input-order" type="text" name="servicetype" id="service-type" class="" required onclick="removeInputError()">
+        <input class="input-order" type="text" name="servicetype" id="service-type" class="" onclick="removeInputError()" value = {{service}}>
       </div>
       
       <div class="div-order">
         <div class="div-label">
           <label for="machine-type" class="">Tipo da máquina: </label>
         </div>
-        <input class="input-order" type="text" name="machinetype" id="machine-type" class="" required onclick="removeInputError()">
+        <input class="input-order" type="text" name="machinetype" id="machine-type" class="" onclick="removeInputError()" value = {{machine}}>
       </div>
       
       <div class="div-order">
         <div class="div-label">
           <label for="order-description" class="">Descrição do serviço: </label>
         </div>
-        <textarea name="orderdescription" id="order-description" cols="30" rows="4" required onclick="removeInputError()"></textarea>
+        <textarea name="orderdescription" id="order-description" cols="30" rows="4" onclick="removeInputError()">{{order}}</textarea>
       </div>
       
       <hr>
     
       <div class="div-btn-send">
-        <button class="btn-send" id="button-send" type="submit" onclick="sendData()">Cadastrar</button>
+        <button class="btn-send" id="button-send" type="submit">Cadastrar</button>
       </div>
   </div>
 </form>
@@ -72,4 +59,9 @@
 {% block script %}
   <script src="/js/orders/add.js" charset="utf-8"></script>
   <link rel="stylesheet" href="/styles/orders/add.css">
+  <script>
+    {% if input %}
+      {{input}}.addClass("error-input");
+    {% endif %}
+  </script>
 {% endblock %}
