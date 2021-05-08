@@ -16,61 +16,33 @@
         <tr>
           <th class="text-center" scope="col">#</th>
           <th class="text-center" scope="col">id</th>
-          <th class="text-center" scope="col">Número do pedido</th>
+          <!-- <th class="text-center" scope="col">Número do pedido</th> -->
           <th class="text-center" scope="col">Hora do pedido</th>
           <th class="text-center" scope="col">Nome do cliente</th>
           <th class="text-center" scope="col">Tipo do serviço</th>
           <th class="text-center" scope="col">Tipo da máquina</th>
-          <th class="text-center" scope="col">Descrição do serviço</th>
+          <!-- <th class="text-center" scope="col">Descrição do serviço</th> -->
           <th class="text-center" scope="col"></th>
         </tr>
       </thead>
       <tbody>
+        {% for order in orders %}
         <tr>
-          <th class="text-center" scope="row">1</th>
-          <td class="text-center">132</td>
-          <td class="text-center">Otto</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
+          <th class="text-center" scope="row">{{order.id}}</th>
+          <td class="text-center">{{order.client_id}}</td>
+          <!-- <td class="text-center"></td> -->
+          <td id="orderDate" class="text-center">{{order.createdAt}}</td>
+          <td class="text-center">Nome Cliente</td>
+          <td class="text-center">{{order.service_type}}</td>
+          <td class="text-center">{{order.machine_type}}</td>
+          <!-- <td class="text-center"></td> -->
           <td class="text-center">
             <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>
             <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
             <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
           </td>
         </tr>
-        <tr>
-          <th class="text-center" scope="row">2</th>
-          <td class="text-center">132</td>
-          <td class="text-center">Otto</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">
-            <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>
-            <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
-            <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
-          </td>
-        </tr>
-        <tr>
-          <th class="text-center" scope="row">3</th>
-          <td class="text-center">132</td>
-          <td class="text-center">Otto</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">
-            <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>
-            <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
-            <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
-          </td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
 </div>
