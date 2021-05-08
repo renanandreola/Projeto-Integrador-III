@@ -22,7 +22,13 @@
         <div class="div-label">
           <label for="client-name" class="">Nome do cliente: </label>
         </div>
-        <input class="input-order" type="text" name="clientname" id="client-name" class="" onclick="removeInputError()" value = {{client}}>
+        <select class="input-order" name="clientname">
+          <!--Insert options here-->
+          <option>---</option>
+          {% for client in clients %}
+            <option value="{{client.id}}">{{client.username}}</option>
+          {% endfor %}
+        </select>
       </div>
       
       <div class="div-order">

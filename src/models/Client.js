@@ -36,7 +36,4 @@ const Client = db.sequelize.define('clients', {
     }
 });
 
-//Não descomentar
-//Client.sync({force: true});
-
 module.exports = Client;

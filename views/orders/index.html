@@ -29,10 +29,10 @@
         {% for order in orders %}
         <tr>
           <th class="text-center" scope="row">{{order.id}}</th>
-          <td class="text-center">{{order.client_id}}</td>
+          <td class="text-center">{{order.clientId}}</td>
           <!-- <td class="text-center"></td> -->
           <td id="orderDate" class="text-center">{{order.createdAt}}</td>
-          <td class="text-center">Nome Cliente</td>
+          <td class="text-center">{{order.client.username}}</td>
           <td class="text-center">{{order.service_type}}</td>
           <td class="text-center">{{order.machine_type}}</td>
           <!-- <td class="text-center"></td> -->
