@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 app.get('/', isAdmin, (req, res) => {
     res.render('index.html');
-    console.log(req);
+    // console.log(req);
 });
 
 app.get('/login', (req, res) => {
@@ -124,11 +124,16 @@ app.post('/orders/add', isAdmin, (req, res) => {
 });
 
 app.get('/orders', isAdmin, (req, res) => {
-    res.render('orders/index.html');
+    res.redirect('orders/index');
 }); 
 
 app.get('/orders/index', isAdmin, (req, res) => {
-    res.render('orders/index.html');
+    Order.findAll().then((order) => {
+        res.render('orders/index.html', {orders: order});
+        console.log("order: ", order);
+    }).catch((err) => {
+        console.log("err: ", err);
+    })
 }); 
 
 module.exports = app;

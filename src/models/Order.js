@@ -16,6 +16,6 @@ const Order = db.sequelize.define('orders', {
 });
 
 //Não descomentar
-//Order.sync({force: true});
+// Order.sync({force: true});
 
 module.exports = Order;
