@@ -1,7 +1,8 @@
 const db = require('../_config/database');
+const Client = require('./Client');
 
 const Order = db.sequelize.define('orders', {
-    client_id: {
+    clientId: {
         type: db.Sequelize.INTEGER
     },
     service_type: {
@@ -15,7 +16,6 @@ const Order = db.sequelize.define('orders', {
     }
 });
 
-//Não descomentar
-// Order.sync({force: true});
+Order.belongsTo(Client);
 
 module.exports = Order;

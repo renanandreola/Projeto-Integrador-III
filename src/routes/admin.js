@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const Order = require('../models/Order');
+const Client = require('../models/Client');
 const bodyParser = require('body-parser');
 const app = express.Router();
 const passport = require('passport');
@@ -67,7 +68,11 @@ app.get('/clients/add', isAdmin, (req, res) => {
 }); 
 
 app.get('/orders/add', isAdmin, (req, res) => {
-    res.render('orders/add.html');
+    Client.findAll().then((clients) => {
+        res.render('orders/add.html', {clients: clients});
+    }).catch((err) => {
+        console.log('err: ' + err);
+    });
 }); 
 
 app.post('/orders/add', isAdmin, (req, res) => {
@@ -110,7 +115,7 @@ app.post('/orders/add', isAdmin, (req, res) => {
     }
     
     Order.create({
-        client_id: clientName,
+        clientId: clientName,
         service_type: serviceType,
         machine_type: machineType,
         service_description: orderDescription
@@ -124,16 +129,20 @@ app.post('/orders/add', isAdmin, (req, res) => {
 });
 
 app.get('/orders', isAdmin, (req, res) => {
-    res.redirect('orders/index');
+    Order.findAll({
+        include: {
+            model: Client,
+            required: true
+        }
+    }).then((orders) => {
+        res.render('orders/index.html', {orders: orders});
+    }).catch((err) => {
+        console.log("err: ", err);
+    });
 }); 
 
 app.get('/orders/index', isAdmin, (req, res) => {
-    Order.findAll().then((order) => {
-        res.render('orders/index.html', {orders: order});
-        console.log("order: ", order);
-    }).catch((err) => {
-        console.log("err: ", err);
-    })
+    res.redirect('/orders');
 }); 
 
 module.exports = app;
