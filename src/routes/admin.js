@@ -44,6 +44,9 @@ app.get('/', isAdmin, (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+    // if(req.isAuthenticated()){
+    //     return res.redirect("/");
+    // }
     res.render('login.html');
 });
 
@@ -126,6 +129,11 @@ app.post('/orders/add', isAdmin, (req, res) => {
         req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
         res.redirect('/orders');
     });
+});
+
+app.get('/logout', isAdmin, (req, res) => {
+    req.logout();
+    res.redirect('/admin/login');
 });
 
 app.get('/orders', isAdmin, (req, res) => {
