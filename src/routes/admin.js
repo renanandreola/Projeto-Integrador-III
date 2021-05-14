@@ -58,6 +58,11 @@ app.post('/login', passport.authenticate('local', {
     res.redirect('/');
 });
 
+app.get('/logout', isAdmin, (req, res) => {
+    req.logout();
+    res.redirect('/admin/login');
+});
+
 app.get('/clients', isAdmin, (req, res) => {
     res.render('clients/index.html');
 });
@@ -80,60 +85,65 @@ app.get('/orders/add', isAdmin, (req, res) => {
 
 app.post('/orders/add', isAdmin, (req, res) => {
 
-    var clientName = req.body.clientname;
-    var serviceType = req.body.servicetype;
-    var machineType = req.body.machinetype;
-    var orderDescription = req.body.orderdescription;
+    Client.findAll().then((clients) => {
+        var clientName = req.body.clientName;
+        var serviceType = req.body.servicetype;
+        var machineType = req.body.machinetype;
+        var orderDescription = req.body.orderdescription;
 
-    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+        Client.findOne({where:{id: clientName}}).then((client) => {
+            var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
 
-    if(clientName == "" || validateInput.test(clientName) == true) {
-        req.flash('error', 'Nome do cliente inválido!');
-        return sendRequestData('clientName');
-    }
+            if(clientName == "0") {
+                req.flash('error', 'Cliente Inválido!');
+                return sendRequestData('clientName');
+            }
 
-    if(serviceType == "" || validateInput.test(serviceType) == true) {
-        req.flash('error', 'Nome do serviço inválido!');
-        return sendRequestData('serviceType');
-    }
+            if(serviceType == "" || validateInput.test(serviceType) == true) {
+                req.flash('error', 'Nome do serviço inválido!');
+                return sendRequestData('serviceType');
+            }
 
-    if(machineType == "" || validateInput.test(machineType) == true) {
-        req.flash('error', 'Nome da máquina inválida!');
-        return sendRequestData('machineType');
-    }
+            if(machineType == "" || validateInput.test(machineType) == true) {
+                req.flash('error', 'Nome da máquina inválida!');
+                return sendRequestData('machineType');
+            }
 
-    if(orderDescription == "" || validateInput.test(orderDescription) == true) {
-        req.flash('error', 'Descrição do pedido inválida!');
-        return sendRequestData('orderDescription');
-    }
+            if(orderDescription == "" || validateInput.test(orderDescription) == true) {
+                req.flash('error', 'Descrição do pedido inválida!');
+                return sendRequestData('orderDescription');
+            }
 
-    function sendRequestData(input) {
-        return res.render('orders/add.html', {
-            client: clientName,
-            service: serviceType,
-            machine: machineType,
-            order: orderDescription,
-            input: input
+            function sendRequestData(input) {
+                return res.render('orders/add.html', {
+                    clientid: clientName,
+                    service: serviceType,
+                    machine: machineType,
+                    order: orderDescription,
+                    input: input,
+                    clients: clients,
+                    name: client.username
+                });
+            }
+            
+            Order.create({
+                clientId: clientName,
+                service_type: serviceType,
+                machine_type: machineType,
+                service_description: orderDescription
+            }).then(function() {
+                req.flash('success', 'Pedido cadastrado com sucesso');
+                res.redirect('/orders');
+            }).catch(function(error) {
+                req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
+                res.redirect('/orders');
+            });
+        }).catch((err) => {
+            console.log('err: ' + err);
         });
-    }
-    
-    Order.create({
-        clientId: clientName,
-        service_type: serviceType,
-        machine_type: machineType,
-        service_description: orderDescription
-    }).then(function() {
-        req.flash('success', 'Pedido cadastrado com sucesso');
-        res.redirect('/orders');
-    }).catch(function(error) {
-        req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
-        res.redirect('/orders');
+    }).catch((err) => {
+        console.log('err: ' + err);
     });
-});
-
-app.get('/logout', isAdmin, (req, res) => {
-    req.logout();
-    res.redirect('/admin/login');
 });
 
 app.get('/orders', isAdmin, (req, res) => {
