@@ -64,11 +64,16 @@ app.get('/logout', isAdmin, (req, res) => {
 });
 
 app.get('/clients', isAdmin, (req, res) => {
-    res.render('clients/index.html');
+    Client.findAll()
+    .then((clients) => {
+        res.render('clients/index.html', {clients: clients});
+    }).catch((err) => {
+        console.log("err: ", err);
+    });
 });
 
 app.get('/clients/index', isAdmin, (req, res) => {
-    res.render('clients/index.html');
+    res.redirect('/admin/clients');
 }); 
 
 app.get('/clients/add', isAdmin, (req, res) => {
@@ -81,6 +86,118 @@ app.get('/orders/add', isAdmin, (req, res) => {
     }).catch((err) => {
         console.log('err: ' + err);
     });
+}); 
+
+app.post('/clients/add', isAdmin, (req, res) => {
+    var name = req.body.name;
+    var lastname = req.body.lastname;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var cell = req.body.cell;
+    var cep = req.body.cep;
+    var state = req.body.state;
+    var city = req.body.city;
+    var district = req.body.district;
+    var address = req.body.address;
+    var number = req.body.number;
+    var complement = req.body.complement;
+
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}123456789\\]/;
+    var validateInput2 = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+    var regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+    if(name == "" || validateInput.test(name) == true) {
+        req.flash('error', 'Nome do cliente inválido');
+        return sendRequestDataClient('name');
+    }
+
+    if(lastname == "" || validateInput.test(lastname) == true) {
+        req.flash('error', 'Sobrenome do cliente inválido');
+        return sendRequestDataClient('lastname');
+    }
+
+    if(email == "" || regexEmail.test(email) == false) {
+        req.flash('error', 'E-mail do cliente inválido');
+        return sendRequestDataClient('email');
+    }
+
+    if(phone == "" || phone.length != 14) {
+        req.flash('error', 'Telefone do cliente inválido');
+        return sendRequestDataClient('phone');
+    }
+
+    if(cell == "" || cell.length != 16) {
+        req.flash('error', 'Celular do cliente inválido');
+        return sendRequestDataClient('cell');
+    }
+
+    if(cep == "" || cep.length != 9) {
+        req.flash('error', 'CEP do cliente inválido');
+        return sendRequestDataClient('cep');
+    }
+
+    if(city == "" || validateInput.test(city) == true) {
+        req.flash('error', 'Cidade do cliente inválido');
+        return sendRequestDataClient('city');
+    }
+
+    if(district == "" || validateInput2.test(district) == true) {
+        req.flash('error', 'Bairro do cliente inválido');
+        return sendRequestDataClient('district');
+    }
+
+    if(address == "" || validateInput2.test(address) == true) {
+        req.flash('error', 'Endereço do cliente inválido');
+        return sendRequestDataClient('address');
+    }
+
+    if(number == "" || validateInput2.test(number) == true) {
+        req.flash('error', 'Número do cliente inválido');
+        return sendRequestDataClient('number');
+    }
+
+    if(complement == "" || validateInput2.test(complement) == true) {
+        req.flash('error', 'Complemento do cliente inválido');
+        return sendRequestDataClient('complement');
+    }
+
+    function sendRequestDataClient(input) {
+        return res.render('orders/add.html', {
+            cellphone: cell,
+            cep: cep,
+            city: city,
+            district: district,
+            address: address,
+            number_address: number,
+            complement: complement,
+            email: email,
+            state: state,
+            username: name + " " + lastname,
+            phone: phone,
+            input: input,
+        });
+    }
+
+    Client.create({
+        cellphone: req.body.cell,
+        cep: req.body.cep,
+        city: req.body.city,
+        district: req.body.district,
+        address: req.body.address,
+        number_address: req.body.number,
+        complement: req.body.complement,
+        email: req.body.email,
+        state: req.body.state,
+        username: req.body.name + " " + req.body.lastname,
+        phone: req.body.phone
+    }).then(function() {
+        req.flash('success', 'Cliente cadastrado com sucesso');
+        res.redirect('/admin/clients');
+    }).catch(function(error) {
+        req.flash('error', 'Não foi possível cadastrar o cliente com sucesso. Erro: ' + error);
+        res.redirect('/admin/clients');
+    });
+    // res.render('clients/add.html');
 }); 
 
 app.post('/orders/add', isAdmin, (req, res) => {
