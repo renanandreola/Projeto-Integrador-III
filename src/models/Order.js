@@ -1,4 +1,5 @@
 const db = require('../_config/database');
+const Machine = require('./Machine');
 const Client = require('./Client');
 
 const Order = db.sequelize.define('orders', {
@@ -17,5 +18,5 @@ const Order = db.sequelize.define('orders', {
 });
 
 Order.belongsTo(Client);
-
+Order.belongsTo(Machine);
 module.exports = Order;
