@@ -9,9 +9,6 @@ const Order = db.sequelize.define('orders', {
     service_type: {
         type: db.Sequelize.STRING
     },
-    machine_type: {
-        type: db.Sequelize.STRING
-    },
     service_description: {
         type: db.Sequelize.TEXT
     }
@@ -19,4 +16,5 @@ const Order = db.sequelize.define('orders', {
 
 Order.belongsTo(Client);
 Order.belongsTo(Machine);
+
 module.exports = Order;

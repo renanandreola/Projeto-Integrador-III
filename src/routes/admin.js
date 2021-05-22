@@ -14,7 +14,6 @@ const session = require('express-session');
 const initializePassport = require('../_config/auth');
 initializePassport(passport);
 const {isAdmin} = require('../helpers/isAdmin');
-const { log } = require('handlebars');
 
 //FLASH
 app.use(flash());
@@ -243,7 +242,7 @@ app.post('/machines/add', isAdmin, (req, res) => {
         });
     }
 
-    Client.create({
+    Machine.create({
         machine_name: machine_name,
         conservation_state: conservation_state,
     }).then(function() {
@@ -301,7 +300,7 @@ app.post('/orders/add', isAdmin, (req, res) => {
             Order.create({
                 clientId: clientName,
                 service_type: serviceType,
-                machine_type: machineType,
+                machineId: machineType,
                 service_description: orderDescription
             }).then(function() {
                 req.flash('success', 'Pedido cadastrado com sucesso');
@@ -320,10 +319,7 @@ app.post('/orders/add', isAdmin, (req, res) => {
 
 app.get('/orders', isAdmin, (req, res) => {
     Order.findAll({
-        include: {
-            model: Client,
-            required: true
-        }
+        include: [Client, Machine]
     }).then((orders) => {
         res.render('orders/index.html', {orders: orders});
     }).catch((err) => {
@@ -340,13 +336,8 @@ app.get('/orders/view/:id', isAdmin, (req, res) => {
     Order.findOne({
         where: {
             id: id
-        }
-    },
-    {
-        include: {
-            model: Client,
-            required: true
-        }
+        },
+        include: [Client, Machine]
     }).then((order) => {
         if (!order) {
             res.render('../views/notFound.html');
@@ -363,12 +354,6 @@ app.get('/clients/view/:id', isAdmin, (req, res) => {
     Client.findOne({
         where: {
             id: id
-        }
-    },
-    {
-        include: {
-            model: Client,
-            required: true
         }
     }).then((client) => {
         if (!client) {

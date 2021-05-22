@@ -3,9 +3,6 @@ const session = require('express-session');
 const app = express();
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
-const restify = require('restify');
-const jquery = require('jquery');
-const handlebars = require('handlebars');
 const admin = require('../routes/admin');
 
 module.exports = () => {
