@@ -13,6 +13,7 @@ const session = require('express-session');
 const initializePassport = require('../_config/auth');
 initializePassport(passport);
 const {isAdmin} = require('../helpers/isAdmin');
+const { log } = require('handlebars');
 
 //FLASH
 app.use(flash());
@@ -279,5 +280,51 @@ app.get('/orders', isAdmin, (req, res) => {
 app.get('/orders/index', isAdmin, (req, res) => {
     res.redirect('/orders');
 }); 
+
+app.get('/orders/view/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+    Order.findOne({
+        where: {
+            id: id
+        }
+    },
+    {
+        include: {
+            model: Client,
+            required: true
+        }
+    }).then((order) => {
+        if (!order) {
+            res.render('../views/notFound.html');
+        } else {
+            res.render('../views/orders/view.html', {order: order});
+        }
+    }).catch((err) => {
+        res.render('../views/notFound.html');
+    })
+});
+
+app.get('/clients/view/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+    Client.findOne({
+        where: {
+            id: id
+        }
+    },
+    {
+        include: {
+            model: Client,
+            required: true
+        }
+    }).then((client) => {
+        if (!client) {
+            res.render('../views/notFound.html');
+        } else {
+            res.render('../views/clients/view.html', {client: client});
+        }
+    }).catch((err) => {
+        res.render('../views/notFound.html');
+    })
+});
 
 module.exports = app;

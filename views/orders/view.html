@@ -1,0 +1,49 @@
+{% extends '../layouts/base.html' %}
+
+{% block title %}
+    Detalhes do pedido
+{% endblock %}
+
+{% block content %}
+
+<div>Detalhes do Pedido</div>
+
+<div>
+    <div>
+        <span>ID: </span>
+        <span>{{order.id}}</span>
+    </div>
+
+    <div>
+        <span>Nome do Cliente: </span>
+        <span>{{order.client.username}}</span>
+    </div>
+
+    <div>
+        <span>Tipo do Serviço: </span>
+        <span>{{order.service_type}}</span>
+    </div>
+
+    <div>
+        <span>Tipo da Máquina: </span>
+        <span>{{order.machine_type}}</span>
+    </div>
+
+    <div>
+        <span>Hora do Pedido: </span>
+        <span>{{order.createdAt}}</span>
+    </div>
+    
+    <div>
+        <span>Descrição do Serviço: </span>
+        <span>{{order.service_description}}</span>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+  <script src="/js/orders/view.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/orders/view.css">
+{% endblock %}
