@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     border: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: Inter,Helvetica Neue,Arial,sans-serif;
 }
 html {
     height: 100%;
@@ -44,20 +44,30 @@ form span {
 main.container {
     background-color: white;
     min-width: 410px;
-    min-height: 60vh;
+    height: 381px;
     padding: 2rem;
     box-shadow: 15px, 15px, 45px rgba(0, 0, 0, 0, 5);
-    border-radius: 10px;
+    border-radius: 0 5px 5px 0;
 }
 
-main h2 {
+ h2 {
+    font-family: 'Poppins';
     font-weight: 200;
     margin-bottom: 1rem;
     color: #157fd1;
     padding-left: 3rem;
+    margin-bottom: 1px;
 }
 
 form div {
     font-weight: 150;
     padding-top: 1rem;
+}
+
+img{
+    border-radius: 5px 0 0 5px;
+}
+
+#email{
+    margin-bottom: 25px;
 }
