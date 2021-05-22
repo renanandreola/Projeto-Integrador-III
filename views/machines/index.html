@@ -1,0 +1,50 @@
+{% extends '../layouts/base.html' %}
+
+{% block title %}
+    Máquinas Cadastradas
+{% endblock %}
+
+{% block content %}
+
+<div class="div-title-registered-machines">
+  <h1 class="text-center" id="title-page-registered-machines">Máquinas Cadastradas</h1>
+  <span class="add-machines"><a href="/admin/machines/add">Cadastar máquina</a></span>
+</div>
+
+<div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">id</th>
+          <th class="text-center" scope="col">Nome da Máquina</th>
+          <th class="text-center" scope="col">Estado de Conservação</th>
+
+          <th class="text-center" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for machine in machines %}
+        <tr>
+          <th class="text-center" scope="row">{{machine.id}}</th>
+
+          <td class="text-center">{{machine.machine_name}}</td>
+          <td class="text-center">{{machine.conservation_state}}</td>
+
+
+          <td class="text-center">
+            <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>
+            <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
+            <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+{% block script %}
+  <script src="/js/machines/index.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/machines/index.css">
+{% endblock %}

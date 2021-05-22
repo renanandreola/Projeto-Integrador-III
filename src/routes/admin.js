@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const Order = require('../models/Order');
 const Client = require('../models/Client');
+const Machine = require('../models/Machine');
 const bodyParser = require('body-parser');
 const app = express.Router();
 const passport = require('passport');
@@ -88,6 +89,24 @@ app.get('/orders/add', isAdmin, (req, res) => {
         console.log('err: ' + err);
     });
 }); 
+
+
+app.get('/machines', isAdmin, (req, res) => {
+    Machine.findAll()
+    .then((machines) => {
+        res.render('machines/index.html', {machines: machines});
+    }).catch((err) => {
+        console.log("err: ", err);
+    });
+});
+
+app.get('/machines/index', isAdmin, (req, res) => {
+    res.redirect('/admin/machines');
+}); 
+
+app.get('/machines/add', isAdmin, (req, res) => {
+    res.render('machines/add.html')
+});
 
 app.post('/clients/add', isAdmin, (req, res) => {
     var name = req.body.name;
@@ -200,6 +219,41 @@ app.post('/clients/add', isAdmin, (req, res) => {
     });
     // res.render('clients/add.html');
 }); 
+
+app.post('/machines/add', isAdmin, (req, res) => {
+    var machine_name = req.body.machine_name;
+    var conservation_state = req.body.conservation_state;
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}123456789\\]/;
+
+    if(machine_name == "" || validateInput.test(machine_name) == true) {
+        req.flash('error', 'Nome da maquina inválido');
+        return sendRequestDataClient('machine_name');
+    }
+
+    if(conservation_state == "" || validateInput.test(conservation_state) == true) {
+        req.flash('error', 'Estado de conservação inválido');
+        return sendRequestDataClient('conservation_state');
+    }
+
+    function sendRequestDataClient(input) {
+        return res.render('machines/add.html', {
+            machine_name: machine_name,
+            conservation_state: conservation_state,
+            input: input,
+        });
+    }
+
+    Client.create({
+        machine_name: machine_name,
+        conservation_state: conservation_state,
+    }).then(function() {
+        req.flash('success', 'Máquina cadastrada com sucesso');
+        res.redirect('/admin/machines');
+    }).catch(function(error) {
+        req.flash('error', 'Não foi possível cadastrar a máquina com sucesso. Erro: ' + error);
+        res.redirect('/admin/machines');
+    });
+});
 
 app.post('/orders/add', isAdmin, (req, res) => {
 
