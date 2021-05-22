@@ -1,0 +1,68 @@
+{% extends '../layouts/base.html' %}
+
+{% block title %}
+    Detalhes do Cliente
+{% endblock %}
+
+{% block content %}
+
+<div>Detalhes do Cliente</div>
+
+<div>
+    <div>
+        <span>ID: </span>
+        <span>{{client.id}}</span>
+    </div>
+    <div>
+        <span>Nome do Cliente: </span>
+        <span>{{client.username}}</span>
+    </div>
+    <div>
+        <span>Email: </span>
+        <span>{{client.email}}</span>
+    </div>
+    <div>
+        <span>Celular: </span>
+        <span>{{client.cellphone}}</span>
+    </div>
+    <div>
+        <span>Telefone: </span>
+        <span>{{client.phone}}</span>
+    </div>
+    <div>
+        <span>CEP: </span>
+        <span>{{client.cep}}</span>
+    </div>
+    <div>
+        <span>Estado: </span>
+        <span>{{client.state}}</span>
+    </div>
+    <div>
+        <span>Cidade: </span>
+        <span>{{client.city}}</span>
+    </div>
+    <div>
+        <span>Bairro: </span>
+        <span>{{client.district}}</span>
+    </div>
+    <div>
+        <span>Endereço: </span>
+        <span>{{client.address}}</span>
+    </div>
+    <div>
+        <span>Número: </span>
+        <span>{{client.number_address}}</span>
+    </div>
+    <div>
+        <span>Complemento: </span>
+        <span>{{client.complement}}</span>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+  <script src="/js/orders/view.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/clients/view.css">
+{% endblock %}
