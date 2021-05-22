@@ -8,19 +8,20 @@
 
 <div class="div-title-registered-orders">
   <h1 class="text-center" id="title-page-registered-orders">Pedidos Cadastrados</h1>
+  <span class="add-orders"><a href="/admin/orders/add">Cadastar pedidos</a></span>
 </div>
 
 <div>
     <table class="table table-hover">
       <thead>
         <tr>
-          <th class="text-center" scope="col">#</th>
           <th class="text-center" scope="col">id</th>
+          <!-- <th class="text-center" scope="col">id</th> -->
           <!-- <th class="text-center" scope="col">Número do pedido</th> -->
-          <th class="text-center" scope="col">Hora do pedido</th>
           <th class="text-center" scope="col">Nome do cliente</th>
           <th class="text-center" scope="col">Tipo do serviço</th>
           <th class="text-center" scope="col">Tipo da máquina</th>
+          <th class="text-center" scope="col">Hora do pedido</th>
           <!-- <th class="text-center" scope="col">Descrição do serviço</th> -->
           <th class="text-center" scope="col"></th>
         </tr>
@@ -29,12 +30,12 @@
         {% for order in orders %}
         <tr>
           <th class="text-center" scope="row">{{order.id}}</th>
-          <td class="text-center">{{order.clientId}}</td>
+          <!-- <td class="text-center">{{order.clientId}}</td> -->
           <!-- <td class="text-center"></td> -->
-          <td id="orderDate" class="text-center">{{order.createdAt}}</td>
           <td class="text-center">{{order.client.username}}</td>
           <td class="text-center">{{order.service_type}}</td>
           <td class="text-center">{{order.machine_type}}</td>
+          <td id="orderDate" class="orderDate text-center">{{order.createdAt}}</td>
           <!-- <td class="text-center"></td> -->
           <td class="text-center">
             <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>

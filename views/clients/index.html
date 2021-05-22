@@ -8,91 +8,50 @@
 
 <div class="div-title-registered-clients">
   <h1 class="text-center" id="title-page-registered-clients">Clientes Cadastrados</h1>
-  <br>
-  <a href="/admin/clients/add">Adicionar Cliente</a>
+  <span class="add-clients" style="text-align: center;"><a href="/admin/clients/add">Adicionar Cliente</a></span>
 </div>
 
 <div>
     <table class="table table-hover">
       <thead>
         <tr>
-          <th class="text-center" scope="col">#</th>
           <th class="text-center" scope="col">id</th>
+          <!-- <th class="text-center" scope="col">id</th> -->
           <th class="text-center" scope="col">Nome</th>
-          <th class="text-center" scope="col">Sobrenome</th>
           <th class="text-center" scope="col">E-mail</th>
           <th class="text-center" scope="col">Telefone</th>
           <th class="text-center" scope="col">Celular</th>
-          <th class="text-center" scope="col">CEP</th>
+          <!-- <th class="text-center" scope="col">CEP</th>
           <th class="text-center" scope="col">Estado</th>
           <th class="text-center" scope="col">Cidade</th>
           <th class="text-center" scope="col">Bairro</th>
           <th class="text-center" scope="col">Endereço</th>
-          <th class="text-center" scope="col">Número</th>
+          <th class="text-center" scope="col">Número</th> -->
           <th class="text-center" scope="col"></th>
         </tr>
       </thead>
       <tbody>
+        {% for client in clients %}
         <tr>
-          <th class="text-center" scope="row">1</th>
-          <td class="text-center">132</td>
-          <td class="text-center">Otto</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
+          <th class="text-center" scope="row">{{client.id}}</th>
+          <!-- <td class="text-center">132</td> -->
+          <td class="text-center">{{client.username}}</td>
+          <td class="text-center">{{client.email}}</td>
+          <td class="text-center">{{client.phone}}</td>
+          <td class="text-center">{{client.cellphone}}</td>
+          <!-- <td class="text-center">{{client.cep}}</td>
+          <td class="text-center">{{client.state}}</td>
+          <td class="text-center">{{client.city}}</td>
+          <td class="text-center">{{client.district}}</td>
+          <td class="text-center">{{client.address}}</td>
+          <td class="text-center">{{client.number_address}}</td> -->
           <td class="text-center">
             <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>
             <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
             <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
           </td>
         </tr>
-        <tr>
-          <th class="text-center" scope="row">2</th>
-          <td class="text-center">132</td>
-          <td class="text-center">Otto</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">
-            <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>
-            <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
-            <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
-          </td>
-        </tr>
-        <tr>
-          <th class="text-center" scope="row">3</th>
-          <td class="text-center">132</td>
-          <td class="text-center">Otto</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">@mdo</td>
-          <td class="text-center">
-            <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button>
-            <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
-            <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
-          </td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
 </div>

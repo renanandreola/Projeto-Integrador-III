@@ -3,6 +3,11 @@
     width: 100%;
     justify-content: center;
     margin-top: 10px;
+    flex-direction: column;
+}
+
+.add-orders {
+    text-align: center;
 }
 
 #title-page-registered-orders {

@@ -44,6 +44,9 @@ app.get('/', isAdmin, (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+    // if(req.isAuthenticated()){
+    //     return res.redirect("/");
+    // }
     res.render('login.html');
 });
 
@@ -55,12 +58,22 @@ app.post('/login', passport.authenticate('local', {
     res.redirect('/');
 });
 
+app.get('/logout', isAdmin, (req, res) => {
+    req.logout();
+    res.redirect('/admin/login');
+});
+
 app.get('/clients', isAdmin, (req, res) => {
-    res.render('clients/index.html');
+    Client.findAll()
+    .then((clients) => {
+        res.render('clients/index.html', {clients: clients});
+    }).catch((err) => {
+        console.log("err: ", err);
+    });
 });
 
 app.get('/clients/index', isAdmin, (req, res) => {
-    res.render('clients/index.html');
+    res.redirect('/admin/clients');
 }); 
 
 app.get('/clients/add', isAdmin, (req, res) => {
@@ -75,56 +88,178 @@ app.get('/orders/add', isAdmin, (req, res) => {
     });
 }); 
 
-app.post('/orders/add', isAdmin, (req, res) => {
+app.post('/clients/add', isAdmin, (req, res) => {
+    var name = req.body.name;
+    var lastname = req.body.lastname;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var cell = req.body.cell;
+    var cep = req.body.cep;
+    var state = req.body.state;
+    var city = req.body.city;
+    var district = req.body.district;
+    var address = req.body.address;
+    var number = req.body.number;
+    var complement = req.body.complement;
 
-    var clientName = req.body.clientname;
-    var serviceType = req.body.servicetype;
-    var machineType = req.body.machinetype;
-    var orderDescription = req.body.orderdescription;
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}123456789\\]/;
+    var validateInput2 = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+    var regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
-
-    if(clientName == "" || validateInput.test(clientName) == true) {
-        req.flash('error', 'Nome do cliente inválido!');
-        return sendRequestData('clientName');
+    if(name == "" || validateInput.test(name) == true) {
+        req.flash('error', 'Nome do cliente inválido');
+        return sendRequestDataClient('name');
     }
 
-    if(serviceType == "" || validateInput.test(serviceType) == true) {
-        req.flash('error', 'Nome do serviço inválido!');
-        return sendRequestData('serviceType');
+    if(lastname == "" || validateInput.test(lastname) == true) {
+        req.flash('error', 'Sobrenome do cliente inválido');
+        return sendRequestDataClient('lastname');
     }
 
-    if(machineType == "" || validateInput.test(machineType) == true) {
-        req.flash('error', 'Nome da máquina inválida!');
-        return sendRequestData('machineType');
+    if(email == "" || regexEmail.test(email) == false) {
+        req.flash('error', 'E-mail do cliente inválido');
+        return sendRequestDataClient('email');
     }
 
-    if(orderDescription == "" || validateInput.test(orderDescription) == true) {
-        req.flash('error', 'Descrição do pedido inválida!');
-        return sendRequestData('orderDescription');
+    if(phone == "" || phone.length != 14) {
+        req.flash('error', 'Telefone do cliente inválido');
+        return sendRequestDataClient('phone');
     }
 
-    function sendRequestData(input) {
+    if(cell == "" || cell.length != 16) {
+        req.flash('error', 'Celular do cliente inválido');
+        return sendRequestDataClient('cell');
+    }
+
+    if(cep == "" || cep.length != 9) {
+        req.flash('error', 'CEP do cliente inválido');
+        return sendRequestDataClient('cep');
+    }
+
+    if(city == "" || validateInput.test(city) == true) {
+        req.flash('error', 'Cidade do cliente inválido');
+        return sendRequestDataClient('city');
+    }
+
+    if(district == "" || validateInput2.test(district) == true) {
+        req.flash('error', 'Bairro do cliente inválido');
+        return sendRequestDataClient('district');
+    }
+
+    if(address == "" || validateInput2.test(address) == true) {
+        req.flash('error', 'Endereço do cliente inválido');
+        return sendRequestDataClient('address');
+    }
+
+    if(number == "" || validateInput2.test(number) == true) {
+        req.flash('error', 'Número do cliente inválido');
+        return sendRequestDataClient('number');
+    }
+
+    if(complement == "" || validateInput2.test(complement) == true) {
+        req.flash('error', 'Complemento do cliente inválido');
+        return sendRequestDataClient('complement');
+    }
+
+    function sendRequestDataClient(input) {
         return res.render('orders/add.html', {
-            client: clientName,
-            service: serviceType,
-            machine: machineType,
-            order: orderDescription,
-            input: input
+            cellphone: cell,
+            cep: cep,
+            city: city,
+            district: district,
+            address: address,
+            number_address: number,
+            complement: complement,
+            email: email,
+            state: state,
+            username: name + " " + lastname,
+            phone: phone,
+            input: input,
         });
     }
-    
-    Order.create({
-        clientId: clientName,
-        service_type: serviceType,
-        machine_type: machineType,
-        service_description: orderDescription
+
+    Client.create({
+        cellphone: req.body.cell,
+        cep: req.body.cep,
+        city: req.body.city,
+        district: req.body.district,
+        address: req.body.address,
+        number_address: req.body.number,
+        complement: req.body.complement,
+        email: req.body.email,
+        state: req.body.state,
+        username: req.body.name + " " + req.body.lastname,
+        phone: req.body.phone
     }).then(function() {
-        req.flash('success', 'Pedido cadastrado com sucesso');
-        res.redirect('/orders');
+        req.flash('success', 'Cliente cadastrado com sucesso');
+        res.redirect('/admin/clients');
     }).catch(function(error) {
-        req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
-        res.redirect('/orders');
+        req.flash('error', 'Não foi possível cadastrar o cliente com sucesso. Erro: ' + error);
+        res.redirect('/admin/clients');
+    });
+    // res.render('clients/add.html');
+}); 
+
+app.post('/orders/add', isAdmin, (req, res) => {
+
+    Client.findAll().then((clients) => {
+        var clientName = req.body.clientName;
+        var serviceType = req.body.servicetype;
+        var machineType = req.body.machinetype;
+        var orderDescription = req.body.orderdescription;
+
+        Client.findOne({where:{id: clientName}}).then((client) => {
+            var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+
+            if(clientName == "0") {
+                req.flash('error', 'Cliente Inválido!');
+                return sendRequestData('clientName');
+            }
+
+            if(serviceType == "" || validateInput.test(serviceType) == true) {
+                req.flash('error', 'Nome do serviço inválido!');
+                return sendRequestData('serviceType');
+            }
+
+            if(machineType == "" || validateInput.test(machineType) == true) {
+                req.flash('error', 'Nome da máquina inválida!');
+                return sendRequestData('machineType');
+            }
+
+            if(orderDescription == "" || validateInput.test(orderDescription) == true) {
+                req.flash('error', 'Descrição do pedido inválida!');
+                return sendRequestData('orderDescription');
+            }
+
+            function sendRequestData(input) {
+                return res.render('orders/add.html', {
+                    clientid: clientName,
+                    service: serviceType,
+                    machine: machineType,
+                    order: orderDescription,
+                    input: input,
+                    clients: clients,
+                    name: client.username
+                });
+            }
+            
+            Order.create({
+                clientId: clientName,
+                service_type: serviceType,
+                machine_type: machineType,
+                service_description: orderDescription
+            }).then(function() {
+                req.flash('success', 'Pedido cadastrado com sucesso');
+                res.redirect('/orders');
+            }).catch(function(error) {
+                req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
+                res.redirect('/orders');
+            });
+        }).catch((err) => {
+            console.log('err: ' + err);
+        });
+    }).catch((err) => {
+        console.log('err: ' + err);
     });
 });
 

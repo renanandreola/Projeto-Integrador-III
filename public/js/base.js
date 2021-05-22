@@ -3,7 +3,7 @@ toastr.options = {
   "debug": false,
   "newestOnTop": false,
   "progressBar": false,
-  "positionClass": "toast-top-center",
+  "positionClass": "toast-top-right",
   "preventDuplicates": false,
   "onclick": null,
   "showDuration": "300",
@@ -14,14 +14,14 @@ toastr.options = {
   "hideEasing": "linear",
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
-};
+}
 
 //Menu Push
 function wrap()
 {
   if(document.getElementById("menu").style.left == "0px")
   {
-    document.getElementById("menu").style.left = "-250px";
+    document.getElementById("menu").style.left = "-1000px";
     document.getElementById("content").style.marginLeft = "0";
     document.getElementById("footer").style.marginLeft = "0";
   }

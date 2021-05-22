@@ -18,16 +18,8 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="sweetalert2.all.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+  
     {% if messages.error %}
-        <script>
-        Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: '{{messages.error}}',
-            showConfirmButton: false,
-            timer: 3000
-        });
-        </script>
     {% endif %}
 
     <main class="container">

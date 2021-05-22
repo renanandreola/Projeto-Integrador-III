@@ -20,13 +20,26 @@
       <div class="div-order">
 
         <div class="div-label">
-          <label for="client-name" class="">Nome do cliente: </label>
+          <label for="clientName" class="">Nome do cliente: </label>
         </div>
-        <select class="input-order" name="clientname">
-          <!--Insert options here-->
-          <option>---</option>
+        <select class="input-order" name="clientName" id="client-name">
+
+          {% if clientid %}
+            {% if clientid != 0 %}
+              <option value="{{clientid}}">{{name}}</option>
+            {% else %}
+              <option value="0"></option>
+            {% endif %}   
+          {% else %}
+            <option value="0"></option>
+          {% endif %}
+
           {% for client in clients %}
-            <option value="{{client.id}}">{{client.username}}</option>
+            {% if clientid != client.id %}
+              {% if client.id != 0 %}
+                <option value="{{client.id}}">{{client.username}}</option>
+              {% endif %}
+            {% endif %}
           {% endfor %}
         </select>
       </div>
