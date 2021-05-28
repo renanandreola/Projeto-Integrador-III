@@ -59,7 +59,25 @@
         <div class="div-label">
           <label for="machine-type" class="">Tipo da máquina: </label>
         </div>
-        <input class="input-order" type="text" name="machinetype" id="machine-type" class="" onclick="removeInputError()" value = {{machine}}>
+        <select class="input-order" name="machinetype" id="machine-type">
+          {% if machineid %}
+            {% if machineid != 0 %}
+              <option value="{{machineid}}">{{mname}}</option>
+            {% else %}
+              <option value="0"></option>
+            {% endif %}   
+          {% else %}
+            <option value="0"></option>
+          {% endif %}
+
+          {% for machine in machines %}
+            {% if machineid != machine.id %}
+              {% if machine.id != 0 %}
+                <option value="{{machine.id}}">{{machine.machine_name}}</option>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </select>
       </div>
       
       <div class="div-order">

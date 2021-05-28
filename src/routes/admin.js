@@ -83,7 +83,11 @@ app.get('/clients/add', isAdmin, (req, res) => {
 
 app.get('/orders/add', isAdmin, (req, res) => {
     Client.findAll().then((clients) => {
-        res.render('orders/add.html', {clients: clients});
+        Machine.findAll().then((machines) => {
+            res.render('orders/add.html', {clients: clients, machines: machines});
+        }).catch((err) => {
+            console.log('err: ' + err);
+        })
     }).catch((err) => {
         console.log('err: ' + err);
     });
@@ -257,57 +261,67 @@ app.post('/machines/add', isAdmin, (req, res) => {
 app.post('/orders/add', isAdmin, (req, res) => {
 
     Client.findAll().then((clients) => {
-        var clientName = req.body.clientName;
-        var serviceType = req.body.servicetype;
-        var machineType = req.body.machinetype;
-        var orderDescription = req.body.orderdescription;
+        Machine.findAll().then((machines) => {
+            var clientName = req.body.clientName;
+            var serviceType = req.body.servicetype;
+            var machineType = req.body.machinetype;
+            var orderDescription = req.body.orderdescription;
 
-        Client.findOne({where:{id: clientName}}).then((client) => {
-            var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+            Client.findOne({where:{id: clientName}}).then((client) => {
+                Machine.findOne({where:{id: machineType}}).then((machine) => {
+                    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
 
-            if(clientName == "0") {
-                req.flash('error', 'Cliente Inválido!');
-                return sendRequestData('clientName');
-            }
+                    if(clientName == "0") {
+                        req.flash('error', 'Cliente Inválido!');
+                        return sendRequestData('clientName');
+                    }
 
-            if(serviceType == "" || validateInput.test(serviceType) == true) {
-                req.flash('error', 'Nome do serviço inválido!');
-                return sendRequestData('serviceType');
-            }
+                    if(serviceType == "" || validateInput.test(serviceType) == true) {
+                        req.flash('error', 'Nome do serviço inválido!');
+                        return sendRequestData('serviceType');
+                    }
 
-            if(machineType == "" || validateInput.test(machineType) == true) {
-                req.flash('error', 'Nome da máquina inválida!');
-                return sendRequestData('machineType');
-            }
+                    if(machineType == "0" || validateInput.test(machineType) == true) {
+                        req.flash('error', 'Nome da máquina inválida!');
+                        return sendRequestData('machineType');
+                    }
 
-            if(orderDescription == "" || validateInput.test(orderDescription) == true) {
-                req.flash('error', 'Descrição do pedido inválida!');
-                return sendRequestData('orderDescription');
-            }
+                    if(orderDescription == "" || validateInput.test(orderDescription) == true) {
+                        req.flash('error', 'Descrição do pedido inválida!');
+                        return sendRequestData('orderDescription');
+                    }
 
-            function sendRequestData(input) {
-                return res.render('orders/add.html', {
-                    clientid: clientName,
-                    service: serviceType,
-                    machine: machineType,
-                    order: orderDescription,
-                    input: input,
-                    clients: clients,
-                    name: client.username
+                    function sendRequestData(input) {
+                        return res.render('orders/add.html', {
+                            clientid: clientName,
+                            service: serviceType,
+                            machineid: machineType,
+                            order: orderDescription,
+                            input: input,
+                            clients: clients,
+                            machines: machines,
+                            name: client.username,
+                            mname: machine.machine_name
+                        });
+                    }
+                    
+                    Order.create({
+                        clientId: clientName,
+                        service_type: serviceType,
+                        machineId: machineType,
+                        service_description: orderDescription
+                    }).then(function() {
+                        req.flash('success', 'Pedido cadastrado com sucesso');
+                        res.redirect('/orders');
+                    }).catch(function(error) {
+                        req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
+                        res.redirect('/orders');
+                    });
+                }).catch((err) => {
+                    console.log('err: ' + err);
                 });
-            }
-            
-            Order.create({
-                clientId: clientName,
-                service_type: serviceType,
-                machineId: machineType,
-                service_description: orderDescription
-            }).then(function() {
-                req.flash('success', 'Pedido cadastrado com sucesso');
-                res.redirect('/orders');
-            }).catch(function(error) {
-                req.flash('error', 'Não foi possível cadastrar com sucesso. Erro: ' + error);
-                res.redirect('/orders');
+            }).catch((err) => {
+                console.log('err: ' + err);
             });
         }).catch((err) => {
             console.log('err: ' + err);
@@ -318,10 +332,21 @@ app.post('/orders/add', isAdmin, (req, res) => {
 });
 
 app.get('/orders', isAdmin, (req, res) => {
+
+    let {order = 'ASC', limit = 20, page = 1} = req.query;
+
+    limit = parseInt(limit);
+    page = parseInt(page - 1);
+
     Order.findAll({
-        include: [Client, Machine]
+        include: [Client, Machine],
+        order: [
+            ['id', order]
+        ],
+        limit: limit,
+        offset: page * limit
     }).then((orders) => {
-        res.render('orders/index.html', {orders: orders});
+        res.render('orders/index.html', {orders: orders, offset: (page * limit) + 1});
     }).catch((err) => {
         console.log("err: ", err);
     });
