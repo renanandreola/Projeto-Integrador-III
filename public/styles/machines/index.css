@@ -1,0 +1,21 @@
+.div-title-registered-machines {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+    flex-direction: column;
+}
+
+.add-machines {
+    text-align: center;
+}
+
+#title-page-registered-machines {
+    font-size: 25px;
+    color: rgb(0, 98, 190);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table-button {
+    width: 80px;
+}

@@ -1,0 +1,31 @@
+.content-404 {
+    position: relative;
+    height: 30em;
+}
+
+.error-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.error404 {
+    color: rgb(29,161,242);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 92px;
+}
+
+.page-not-found {
+    color: rgb(29,161,242);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+}
