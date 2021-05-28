@@ -6,40 +6,45 @@
 
 {% block content %}
 
-<div>Detalhes do Pedido</div>
+<div class="title-view-order">
+    <span class="span-view-order">Detalhes do Pedido</span>
+</div>
 
-<div>
-    <div>
-        <span>ID: </span>
-        <span>{{order.id}}</span>
+<div class="content-info-orders">
+    <div class="card-info-order">
+        <span class="span-content-order">ID: </span>
+        <span class="dynamic-contents">{{order.id}}</span>
     </div>
 
-    <div>
-        <span>Nome do Cliente: </span>
-        <span>{{order.client.username}}</span>
+    <div class="card-info-order">
+        <span class="span-content-order">Nome do Cliente: </span>
+        <span class="dynamic-contents">{{order.client.username}}</span>
     </div>
 
-    <div>
-        <span>Tipo do Serviço: </span>
-        <span>{{order.service_type}}</span>
+    <div class="card-info-order">
+        <span class="span-content-order">Tipo do Serviço: </span>
+        <span class="dynamic-contents">{{order.service_type}}</span>
     </div>
 
-    <div>
-        <span>Tipo da Máquina: </span>
-        <span>{{order.machine.machine_name}}</span>
+    <div class="card-info-order">
+        <span class="span-content-order">Tipo da Máquina: </span>
+        <span class="dynamic-contents">{{order.machine.machine_name}}</span>
     </div>
 
-    <div>
-        <span>Hora do Pedido: </span>
-        <span>{{order.createdAt}}</span>
+    <div class="card-info-order">
+        <span class="span-content-order">Hora do Pedido: </span>
+        <span class="dynamic-contents">{{order.createdAt}}</span>
     </div>
     
-    <div>
-        <span>Descrição do Serviço: </span>
-        <span>{{order.service_description}}</span>
+    <div class="card-info-order">
+        <span class="span-content-order">Descrição do Serviço: </span>
+        <span class="dynamic-contents">{{order.service_description}}</span>
     </div>
 </div>
 
+<div class="print-button">
+    <input class="btn-print" type="button" value="Imprimir página" onClick="window.print()"/>
+</div>
 
 {% endblock %}
 
