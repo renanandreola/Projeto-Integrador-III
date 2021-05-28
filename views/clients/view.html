@@ -6,59 +6,64 @@
 
 {% block content %}
 
-<div>Detalhes do Cliente</div>
+<div class="title-view-client">
+    <span class="span-view-client">Detalhes do Cliente</span>
+</div>
 
-<div>
-    <div>
-        <span>ID: </span>
-        <span>{{client.id}}</span>
+<div class="content-info-clients">
+    <div class="card-info-client">
+        <span class="span-content-client">ID: </span>
+        <span class="dynamic-contents">{{client.id}}</span>
     </div>
-    <div>
-        <span>Nome do Cliente: </span>
-        <span>{{client.username}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Nome do Cliente: </span>
+        <span class="dynamic-contents">{{client.username}}</span>
     </div>
-    <div>
-        <span>Email: </span>
-        <span>{{client.email}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Email: </span>
+        <span class="dynamic-contents">{{client.email}}</span>
     </div>
-    <div>
-        <span>Celular: </span>
-        <span>{{client.cellphone}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Celular: </span>
+        <span class="dynamic-contents">{{client.cellphone}}</span>
     </div>
-    <div>
-        <span>Telefone: </span>
-        <span>{{client.phone}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Telefone: </span>
+        <span class="dynamic-contents">{{client.phone}}</span>
     </div>
-    <div>
-        <span>CEP: </span>
-        <span>{{client.cep}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">CEP: </span>
+        <span class="dynamic-contents">{{client.cep}}</span>
     </div>
-    <div>
-        <span>Estado: </span>
-        <span>{{client.state}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Estado: </span>
+        <span class="dynamic-contents">{{client.state}}</span>
     </div>
-    <div>
-        <span>Cidade: </span>
-        <span>{{client.city}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Cidade: </span>
+        <span class="dynamic-contents">{{client.city}}</span>
     </div>
-    <div>
-        <span>Bairro: </span>
-        <span>{{client.district}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Bairro: </span>
+        <span class="dynamic-contents">{{client.district}}</span>
     </div>
-    <div>
-        <span>Endereço: </span>
-        <span>{{client.address}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Endereço: </span>
+        <span class="dynamic-contents">{{client.address}}</span>
     </div>
-    <div>
-        <span>Número: </span>
-        <span>{{client.number_address}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Número: </span>
+        <span class="dynamic-contents">{{client.number_address}}</span>
     </div>
-    <div>
-        <span>Complemento: </span>
-        <span>{{client.complement}}</span>
+    <div class="card-info-client">
+        <span class="span-content-client">Complemento: </span>
+        <span class="dynamic-contents">{{client.complement}}</span>
     </div>
 </div>
 
+<div class="print-button">
+    <input class="btn-print" type="button" value="Imprimir página" onClick="window.print()"/>
+</div>
 
 {% endblock %}
 
