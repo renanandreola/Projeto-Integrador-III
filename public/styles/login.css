@@ -30,6 +30,7 @@ main form input {
     height: 45px;
     width: 350px;
     padding: 5px;
+    padding: 0.8rem;
     color: #157fd1;
     font-size: 1rem;
     border: 1px solid #157fd1;
