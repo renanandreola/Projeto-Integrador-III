@@ -18,6 +18,7 @@ body, html {
 .content {
     margin-top: 60px;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 .menu {
@@ -37,7 +38,7 @@ body, html {
     display: contents;
 }
 
-a:hover {
+a.navigation-item:hover {
     color: black!important;
     text-decoration: none!important;
     border: none;
@@ -101,3 +102,52 @@ a:hover {
 .small {
     margin-bottom: 0;
 }
+
+.link-no-blue {
+    text-decoration: none;
+    color: black;
+}
+
+.link-no-blue:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.pagination {
+    display: inline-block;
+    width: 295px;
+    margin: auto;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+  }
+  
+  .pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+  }
+
+  .pagination a.active:hover {
+    text-decoration: none;
+  }
+  
+  .pagination a:hover:not(.active) {
+    background-color: #ddd;
+    text-decoration: none;
+  }
+  
+  .pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  
+  .pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }

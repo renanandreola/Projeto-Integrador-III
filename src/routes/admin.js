@@ -226,7 +226,7 @@ app.post('/clients/add', isAdmin, (req, res) => {
 app.post('/machines/add', isAdmin, (req, res) => {
     var machine_name = req.body.machine_name;
     var conservation_state = req.body.conservation_state;
-    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}123456789\\]/;
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
 
     if(machine_name == "" || validateInput.test(machine_name) == true) {
         req.flash('error', 'Nome da maquina inválido');
@@ -331,22 +331,80 @@ app.post('/orders/add', isAdmin, (req, res) => {
     });
 });
 
+/**
+ * Orders Index
+ */
 app.get('/orders', isAdmin, (req, res) => {
 
-    let {order = 'ASC', limit = 20, page = 1} = req.query;
+    //Count how many query strings are in  the url
+    var countQuery = 0;
+    for (i in req.query) {
+        countQuery++;
+    }
+
+    let {order = 'ASC', limit = 15, page = 1, column = 'id'} = req.query;
 
     limit = parseInt(limit);
     page = parseInt(page - 1);
 
-    Order.findAll({
+    Order.findAndCountAll({
         include: [Client, Machine],
         order: [
-            ['id', order]
+            [column, order]
         ],
         limit: limit,
         offset: page * limit
-    }).then((orders) => {
-        res.render('orders/index.html', {orders: orders, offset: (page * limit) + 1});
+    }).then(({count: quantity, rows: orders}) => {
+
+        pages = [];
+        //Calc pagination
+        //init will ever be 1
+        //last depends of quantity and limit
+        last = quantity / limit;
+        last = Math.ceil(last);
+
+        if(page + 1 <= 3) {
+            if(last < 5) {
+                if(last == 4) {
+                    pages = [1, 2, 3, 4]
+                } else if(last == 3) {
+                    pages = [1, 2, 3]
+                } else if (last == 2) {
+                    pages = [1, 2]
+                } else {
+                    pages = [1]
+                }
+            } else {
+                pages = [1, 2, 3, 4, 5];
+            } 
+        } else if ((last - (page + 1)) < 2) {  
+            if(last < 5) {
+                if(last == 4) {
+                    pages = [last - 3, last - 2, last - 1, last]
+                } else if(last == 3) {
+                    pages = [last - 2, last - 1, last]
+                } else if (last == 2) {
+                    pages = [last - 1, last]
+                } else {
+                    pages = [last];
+                }
+            } else {
+                pages = [last -4, last - 3, last - 2, last - 1, last];
+            }    
+        } else {
+            pages = [page - 1, page, page + 1, page + 2, page + 3];
+        }
+
+        res.render('orders/index.html', 
+        {
+            orders: orders,
+            offset: (page * limit) + 1,
+            count: countQuery,
+            order: order,
+            queries: req.query,
+            pages: pages,
+            last: last
+        });
     }).catch((err) => {
         console.log("err: ", err);
     });

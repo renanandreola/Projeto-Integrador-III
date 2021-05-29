@@ -15,7 +15,9 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th class="text-center" scope="col">id</th>
+          <th class="text-center" scope="col">
+            <a class="link-no-blue" href="/admin/orders?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}{%if count > 0%}{%for var, query in queries %}{%if var != 'order'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">id</a>
+          </th>
           <!-- <th class="text-center" scope="col">id</th> -->
           <!-- <th class="text-center" scope="col">Número do pedido</th> -->
           <th class="text-center" scope="col">Nome do cliente</th>
@@ -46,6 +48,14 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <div class="pagination">
+      <a href="/admin/orders?page=1{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">&laquo;</a>
+        {% for page in pages %}
+          <a {%if queries.page == page%}class="active"{%elif queries.page == undefined and page == 1%}class="active"{%endif%} href="/admin/orders?page={{page}}{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">{{page}}</a>
+        {% endfor %}
+      <a href="/admin/orders?page={{last}}{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">&raquo;</a>
+    </div>
 </div>
 
 {% endblock %}
