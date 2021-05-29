@@ -9,6 +9,7 @@ body, html {
     background-color: rgb(226, 226, 253);
     padding-top: 0.5%;
     padding-left: 5%;
+    z-index: 4;
 }
 
 .global {
@@ -16,9 +17,14 @@ body, html {
 }
 
 .content {
-    margin-top: 60px;
     width: 100%;
-    margin-bottom: 30px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.principal-content {
+    width: 90%;
+    margin: auto;
 }
 
 .menu {
@@ -28,6 +34,7 @@ body, html {
     width: 15%;
     margin-top: 60px;
     flex-direction: column;
+    z-index: 3;
 }
 
 #menu-button:hover {
@@ -115,39 +122,47 @@ a.navigation-item:hover {
 
 .pagination {
     display: inline-block;
-    width: 295px;
     margin: auto;
-  }
-  
-  .pagination a {
+}
+
+.pagination a {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
     border: 1px solid #ddd;
-  }
-  
-  .pagination a.active {
+}
+
+.pagination a.active {
     background-color: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
-  }
+}
 
-  .pagination a.active:hover {
+.pagination a.active:hover {
     text-decoration: none;
-  }
-  
-  .pagination a:hover:not(.active) {
+}
+
+.pagination a:hover:not(.active) {
     background-color: #ddd;
     text-decoration: none;
-  }
-  
-  .pagination a:first-child {
+}
+
+.pagination a:first-child {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-  }
-  
-  .pagination a:last-child {
+}
+
+.pagination a:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-  }
+}
+
+.btn-select {
+    width: 50px !important;
+}
+
+.image-ico {
+    filter: invert(100%);
+    width: 18px;
+}

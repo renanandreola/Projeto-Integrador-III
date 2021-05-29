@@ -342,7 +342,19 @@ app.get('/orders', isAdmin, (req, res) => {
         countQuery++;
     }
 
-    let {order = 'ASC', limit = 15, page = 1, column = 'id'} = req.query;
+    let {order = 'DESC', limit = 15, page = 1, column = 'id'} = req.query;
+
+    //Tests if column query string have a foreign key
+    var query_model = column.split('.');
+    var ordenation = [column, order];
+
+    if(query_model.length == 2) {
+        if(query_model[0] == 'client') {
+            ordenation = [Client, query_model[1], order];
+        } else if (query_model[0] == 'machine') {
+            ordenation = [Machine, query_model[1], order];
+        }
+    }
 
     limit = parseInt(limit);
     page = parseInt(page - 1);
@@ -350,16 +362,16 @@ app.get('/orders', isAdmin, (req, res) => {
     Order.findAndCountAll({
         include: [Client, Machine],
         order: [
-            [column, order]
+            [ordenation]
         ],
         limit: limit,
         offset: page * limit
     }).then(({count: quantity, rows: orders}) => {
 
-        pages = [];
         //Calc pagination
         //init will ever be 1
         //last depends of quantity and limit
+        pages = [];
         last = quantity / limit;
         last = Math.ceil(last);
 
