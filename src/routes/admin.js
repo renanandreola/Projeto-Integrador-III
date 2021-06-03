@@ -342,7 +342,25 @@ app.get('/orders', isAdmin, (req, res) => {
         countQuery++;
     }
 
-    let {order = 'DESC', limit = 15, page = 1, column = 'id'} = req.query;
+    let {
+        order = 'DESC',
+        limit = 15,
+        page = 1,
+        column = 'id',
+        id = '',
+        service = '',
+        clientname = '',
+        machinename = '',
+        start = '',
+        end = ''
+    } = req.query;
+
+    //Tests if search is disabled
+    var conditions = {};
+    if(id != '' || service != '' || clientname != '' || machinename != '' || start != '' || end != '') {
+        //Search Enabled
+        conditions = {id: 42};
+    }
 
     //Tests if column query string have a foreign key
     var query_model = column.split('.');
@@ -364,6 +382,7 @@ app.get('/orders', isAdmin, (req, res) => {
         order: [
             [ordenation]
         ],
+        where: conditions,
         limit: limit,
         offset: page * limit
     }).then(({count: quantity, rows: orders}) => {
@@ -406,17 +425,30 @@ app.get('/orders', isAdmin, (req, res) => {
         } else {
             pages = [page - 1, page, page + 1, page + 2, page + 3];
         }
-
-        res.render('orders/index.html', 
-        {
-            orders: orders,
-            offset: (page * limit) + 1,
-            count: countQuery,
-            order: order,
-            queries: req.query,
-            pages: pages,
-            last: last
+        
+        Client.findAll().then((clients) => {
+            Machine.findAll().then((machines) => {
+                res.render('orders/index.html', 
+                {
+                    orders: orders,
+                    clients: clients,
+                    machines: machines,
+                    offset: (page * limit) + 1,
+                    count: countQuery,
+                    order: order,
+                    queries: req.query,
+                    pages: pages,
+                    last: last
+                });
+            }).catch((err) => {
+                res.render('../views/notFound.html');
+                console.log("err: ", err);
+            });
+        }).catch((err) => {
+            res.render('../views/notFound.html');
+            console.log("err: ", err);
         });
+        
     }).catch((err) => {
         console.log("err: ", err);
     });

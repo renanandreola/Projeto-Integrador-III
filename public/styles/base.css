@@ -6,7 +6,7 @@ body, html {
     position: fixed;
     width: 100%;
     height: 60px;
-    background-color: rgb(226, 226, 253);
+    background-color: #c9e9ff;
     padding-top: 0.5%;
     padding-left: 5%;
     z-index: 4;
@@ -19,12 +19,68 @@ body, html {
 .content {
     width: 100%;
     margin-top: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .principal-content {
-    width: 90%;
+    width: 80%;
     margin: auto;
+    font-size: 14px;
+}
+
+.principal-content td {
+    vertical-align: middle !important;
+    border: none !important;
+    border-color: none !important;
+}
+
+.principal-content table {
+    border: solid 1px rgb(197, 196, 196)!important;
+}
+
+.principal-content thead {
+    border: none !important;
+    border-color: none !important;
+    border-bottom: solid 1px rgb(197, 196, 196) !important;
+}
+
+.principal-content tr {
+    border: none !important;
+    border-color: none !important;
+}
+
+.principal-content th {
+    border: none !important;
+    border-color: none !important;
+}
+
+.principal-content .table-header {
+    background-color: #085b96;
+    color: white;
+}
+
+.principal-content .table-header a {
+    color: white;
+}
+
+.principal-content .search-box {
+    border: solid 1px rgb(197, 196, 196);
+    margin-bottom: 30px;
+    padding: 20px;
+    overflow: auto;
+}
+
+.search-box .search-input-text {
+    width: 49%;
+    height: 40px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: solid 1.5px black;
+}
+
+.left {
+    margin-right: 1.5%
 }
 
 .menu {
@@ -159,7 +215,7 @@ a.navigation-item:hover {
 }
 
 .btn-select {
-    width: 50px !important;
+    width: 40px !important;
 }
 
 .image-ico {
