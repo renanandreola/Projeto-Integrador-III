@@ -19,3 +19,23 @@
 .table-button {
     width: 80px;
 }
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+label {
+    width: 49%;
+}
+
+.button-right {
+    width: 20%;
+    background-color: #069aff;
+    color: white;
+    border: solid 2px #005fff;
+    border-radius: 5px;
+    height: 40px;
+    font-weight: bold;
+    float: right;
+}
