@@ -25,17 +25,22 @@ body, html {
 .principal-content {
     width: 80%;
     margin: auto;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .principal-content td {
     vertical-align: middle !important;
     border: none !important;
     border-color: none !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .principal-content table {
     border: solid 1px rgb(197, 196, 196)!important;
+    width: 100% !important;
+    white-space: nowrap !important;
+    table-layout: fixed !important;
 }
 
 .principal-content thead {
@@ -65,9 +70,11 @@ body, html {
 
 .principal-content .search-box {
     border: solid 1px rgb(197, 196, 196);
+    border-radius: 3px;
     margin-bottom: 30px;
     padding: 20px;
     overflow: auto;
+    background-color: #f2f2f2;
 }
 
 .search-box .search-input-text {
@@ -76,7 +83,7 @@ body, html {
     padding-left: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
-    border: solid 1.5px black;
+    border: solid 1.5px rgb(173, 173, 173);
 }
 
 .left {
@@ -221,4 +228,47 @@ a.navigation-item:hover {
 .image-ico {
     filter: invert(100%);
     width: 18px;
+}
+
+/*Set some col settings*/
+
+.coll-0-8 {
+    width: 8%;
+}
+.coll-1 {
+    width: 10%;
+}
+.coll-2 {
+    width: 20%;
+}
+.coll-3 {
+    width: 30%;
+}
+
+.coll-4 {
+    width: 40%;
+}
+
+.coll-5 {
+    width: 50%;
+}
+
+.coll-6 {
+    width: 60%;
+}
+
+.coll-7 {
+    width: 70%;
+}
+
+.coll-8 {
+    width: 80%;
+}
+
+.coll-9 {
+    width: 90%;
+}
+
+.coll-10 {
+    width: 90%;
 }
