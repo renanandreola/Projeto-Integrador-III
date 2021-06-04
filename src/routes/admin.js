@@ -14,6 +14,9 @@ const session = require('express-session');
 const initializePassport = require('../_config/auth');
 initializePassport(passport);
 const {isAdmin} = require('../helpers/isAdmin');
+const search = require('../helpers/search');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 //FLASH
 app.use(flash());
@@ -355,11 +358,12 @@ app.get('/orders', isAdmin, (req, res) => {
         end = ''
     } = req.query;
 
-    //Tests if search is disabled
     var conditions = {};
+    //Tests if search is disabled
     if(id != '' || service != '' || clientname != '' || machinename != '' || start != '' || end != '') {
         //Search Enabled
-        conditions = {id: 42};
+        conditions = search.searchOrder(id, service, clientname, machinename, start, end);
+        console.log(conditions);
     }
 
     //Tests if column query string have a foreign key
