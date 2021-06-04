@@ -1,0 +1,109 @@
+{% extends '../layouts/base.html' %}
+
+{% block title %}
+  Editar pedido
+{% endblock %}
+
+{% block content %}
+
+<form action="/admin/orders/edit/{{id}}" method="post">
+  <div class="div-title-page-orders">
+    <h1 class="text-center" id="title-page-orders">Editar Pedido</h1>
+  </div>
+
+<div class="aux-add" style="display: flex; width: 100%; justify-content: center;">
+  <p style="margin: 0;">O cliente não possui cadastro? <a href="/admin/clients/add">Cadastrar Cliente</a></p>
+</div>
+
+<div class="aux-add" style="display: flex; width: 100%; justify-content: center;">
+  <p style="margin: 0;">Não existe máquina cadastrada? <a href="/admin/machines/add">Cadastrar Máquinas</a></p>
+</div>
+
+<div class="start-div">
+  <div class="form-orders">
+      <div class="div-order">
+
+        <div class="div-label">
+          <label for="clientName" class="">Nome do cliente: </label>
+        </div>
+        <select class="input-order" name="clientName" id="client-name">
+
+          {% if clientid %}
+            {% if clientid != 0 %}
+              <option value="{{clientid}}">{{name}}</option>
+            {% else %}
+              <option value="0"></option>
+            {% endif %}   
+          {% else %}
+            <option value="0"></option>
+          {% endif %}
+
+          {% for client in clients %}
+            {% if clientid != client.id %}
+              {% if client.id != 0 %}
+                <option value="{{client.id}}">{{client.username}}</option>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      
+      <div class="div-order">
+        <div class="div-label">
+          <label for="service-type" class="">Tipo do serviço: </label>
+        </div>
+        <input class="input-order" type="text" name="servicetype" id="service-type" class="" onclick="removeInputError()" value = {{service}}>
+      </div>
+      
+      <div class="div-order">
+        <div class="div-label">
+          <label for="machine-type" class="">Tipo da máquina: </label>
+        </div>
+        <select class="input-order" name="machinetype" id="machine-type">
+          {% if machineid %}
+            {% if machineid != 0 %}
+              <option value="{{machineid}}">{{mname}}</option>
+            {% else %}
+              <option value="0"></option>
+            {% endif %}   
+          {% else %}
+            <option value="0"></option>
+          {% endif %}
+
+          {% for machine in machines %}
+            {% if machineid != machine.id %}
+              {% if machine.id != 0 %}
+                <option value="{{machine.id}}">{{machine.machine_name}}</option>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      
+      <div class="div-order">
+        <div class="div-label">
+          <label for="order-description" class="">Descrição do serviço: </label>
+        </div>
+        <textarea name="orderdescription" id="order-description" cols="30" rows="4" onclick="removeInputError()">{{order}}</textarea>
+      </div>
+      
+      <hr>
+    
+      <div class="div-btn-send">
+        <button class="btn-send" id="button-send" type="submit">Cadastrar</button>
+      </div>
+  </div>
+</div>
+</form>
+
+{% endblock %}
+
+{% block script %}
+  <script src="/js/orders/edit.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/orders/edit.css">
+  <script>
+    {% if input %}
+      {{input}}.addClass("error-input");
+    {% endif %}
+  </script>
+{% endblock %}

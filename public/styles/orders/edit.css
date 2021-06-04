@@ -1,0 +1,63 @@
+.div-title-page-orders {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#title-page-orders {
+    font-size: 25px;
+    color: rgb(0, 98, 190);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.start-div {
+    display: flex;
+    width: 100%;
+}
+
+.form-orders {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.div-order {
+    display: flex;
+    flex-direction: column;
+    /* height: 80px; */
+    font-family: serif;
+    width: 80%;
+}
+
+.input-order {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid;
+    height: 40px;
+}
+
+.div-btn-send {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-send {
+    height: 40px;
+    font-family: serif;
+    background-color: rgb(29,161,242);
+    border: 1px solid black;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    width: 20%;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.error-input {
+    border: 1px solid red;
+    /* background-color: rgb(243, 148, 148); */
+}

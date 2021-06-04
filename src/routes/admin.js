@@ -497,4 +497,130 @@ app.get('/clients/view/:id', isAdmin, (req, res) => {
     })
 });
 
+app.get('/orders/delete/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+    Order.destroy({
+        where: {
+            id: id
+        }
+    });
+    req.flash('success', 'Pedido excluído com sucesso');
+    res.redirect("/admin/orders");
+});
+
+app.get('/orders/edit/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+
+    Order.findOne({
+        where: {
+            id: id
+        },
+        include: [Client, Machine]
+
+    }).then((order) => {
+        Client.findAll().then((clients) => {
+            Machine.findAll().then((machines) => {
+                res.render('orders/edit.html', {
+                    service: order.service_type,
+                    order: order.service_description,
+                    clientid: order.clientId,
+                    name: order.client.username,
+                    clients: clients,
+                    machines: machines,
+                    machineid: order.machineId,
+                    mname: order.machine.machine_name,
+                    id: id
+                });
+            })
+        })
+    })
+
+});
+
+app.post('/orders/edit/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+    Client.findAll().then((clients) => {
+        Machine.findAll().then((machines) => {
+            var clientName = req.body.clientName;
+            var serviceType = req.body.servicetype;
+            var machineType = req.body.machinetype;
+            var orderDescription = req.body.orderdescription;
+
+            Client.findOne({where:{id: clientName}}).then((client) => {
+                Machine.findOne({where:{id: machineType}}).then((machine) => {
+                    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+
+                    if(clientName == "0") {
+                        req.flash('error', 'Cliente Inválido!');
+                        return sendRequestData('clientName');
+                    }
+
+                    if(serviceType == "" || validateInput.test(serviceType) == true) {
+                        req.flash('error', 'Nome do serviço inválido!');
+                        return sendRequestData('serviceType');
+                    }
+
+                    if(machineType == "0" || validateInput.test(machineType) == true) {
+                        req.flash('error', 'Nome da máquina inválida!');
+                        return sendRequestData('machineType');
+                    }
+
+                    if(orderDescription == "" || validateInput.test(orderDescription) == true) {
+                        req.flash('error', 'Descrição do pedido inválida!');
+                        return sendRequestData('orderDescription');
+                    }
+
+                    function sendRequestData(input) {
+                        return res.render('orders/add.html', {
+                            clientid: clientName,
+                            service: serviceType,
+                            machineid: machineType,
+                            order: orderDescription,
+                            input: input,
+                            clients: clients,
+                            machines: machines,
+                            name: client.username,
+                            mname: machine.machine_name
+                        });
+                    }
+                    
+                    Order.update({
+                        clientId: clientName,
+                        service_type: serviceType,
+                        machineId: machineType,
+                        service_description: orderDescription
+                    }, {
+                        where: {
+                            id: id
+                        }
+                    }).then(function() {
+                        req.flash('success', 'Pedido atualizado com sucesso');
+                        res.redirect('/orders');
+                    }).catch(function(error) {
+                        req.flash('error', 'Não foi possível atualizar com sucesso. Erro: ' + error);
+                        res.redirect('/orders');
+                    });
+                }).catch((err) => {
+                    console.log('err: ' + err);
+                });
+            }).catch((err) => {
+                console.log('err: ' + err);
+            });
+        }).catch((err) => {
+            console.log('err: ' + err);
+        });
+    }).catch((err) => {
+        console.log('err: ' + err);
+    });
+
+    // Order.update({ 
+         
+    // }, {
+    //     where: {
+    //       id: id
+    //     }
+    // }).then((user) => {}).catch((err) => {});
+});
+
+
 module.exports = app;
