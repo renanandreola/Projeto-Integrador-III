@@ -1,0 +1,53 @@
+{% extends '../layouts/base.html' %}
+
+{% block title %}
+  Editar Máquinas
+{% endblock %}
+
+{% block content %}
+
+<form action="/admin/machines/edit/{{id}}" method="post">
+  <div class="div-title-page-machines">
+    <h1 class="text-center" id="title-page-machines">Cadastrar Máquinas</h1>
+  </div>
+
+<div class="start-div">
+  <div class="form-machines">
+      <div class="div-machines">
+
+        <div class="div-label">
+          <label for="machine_name" class="">Nome da máquina: </label>
+        </div>
+        <input value="{{machine_name}}" class="input-machines" type="text" name="machine_name" id="machine_name" class="" onclick="removeInputError()">
+      
+      </div>
+      
+      <div class="div-machines">
+
+        <div class="div-label">
+          <label for="conservation_state" class="">Estado de conservação da máquina: </label>
+        </div>
+        <input value="{{conservation_state}}" class="input-machines" type="text" name="conservation_state" id="conservation_state" class="" onclick="removeInputError()">
+      
+      </div>
+      
+      <hr>
+    
+      <div class="div-btn-send">
+        <button class="btn-send" id="button-send" type="submit">Cadastrar</button>
+      </div>
+  </div>
+</div>
+</form>
+
+{% endblock %}
+
+{% block script %}
+  <script src="/js/machines/add.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/machines/add.css">
+  <script>
+    {% if input %}
+      {{input}}.addClass("error-input");
+    {% endif %}
+  </script>
+{% endblock %}
