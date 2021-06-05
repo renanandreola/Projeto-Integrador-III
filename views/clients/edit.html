@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<form action="/admin/clients/add" method="post"> 
+<form action="/admin/clients/edit/{{id}}" method="post"> 
   <div class="div-title-page-clients">
     <h1 class="text-center" id="title-page-clients">Cadastrar Clientes</h1>
   </div>
@@ -18,7 +18,7 @@
         <div class="div-label">
           <label for="name" class="">Nome: </label>
         </div>
-        <input type="text" name="name" id="name" class="input-client" onclick="removeInputError()">
+        <input value="{{username}}" type="text" name="name" id="name" class="input-client" onclick="removeInputError()">
       </div>
 
       <!-- <div class="div-clients">
@@ -32,28 +32,28 @@
         <div class="div-label">
           <label for="email" class="">E-mail: </label>
         </div>
-        <input type="email" name="email" id="email" class="input-client" onclick="removeInputError()">
+        <input value="{{email}}" type="email" name="email" id="email" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
         <div class="div-label">
           <label for="phone" class="">Telefone: </label>
         </div>
-        <input type="text" name="phone" id="phone" class="input-client" onclick="removeInputError()">
+        <input value="{{phone}}" type="text" name="phone" id="phone" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
         <div class="div-label">
           <label for="cell" class="">Celular: </label>
         </div>
-        <input type="text" name="cell" id="cell" class="input-client" onclick="removeInputError()">
+        <input value="{{cellphone}}" type="text" name="cell" id="cell" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
         <div class="div-label">
           <label for="cep" class="">CEP: </label>
         </div>
-        <input type="text" name="cep" id="cep" class="input-client" onclick="removeInputError()">
+        <input value="{{cep}}" type="text" name="cep" id="cep" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
@@ -96,35 +96,35 @@
         <div class="div-label">
           <label for="city" class="">Cidade: </label>
         </div>
-        <input type="text" name="city" id="city" class="input-client" onclick="removeInputError()">
+        <input value="{{city}}" type="text" name="city" id="city" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
         <div class="div-label">
           <label for="district" class="">Bairro: </label>
         </div>
-        <input type="text" name="district" id="district" class="input-client" onclick="removeInputError()">
+        <input value="{{district}}" type="text" name="district" id="district" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
         <div class="div-label">
           <label for="address" class="">Endereço: </label>
         </div>
-        <input type="text" name="address" id="address" class="input-client" onclick="removeInputError()">
+        <input value="{{address}}" type="text" name="address" id="address" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
         <div class="div-label">
           <label for="number" class="">Número: </label>
         </div>
-        <input type="number" name="number" id="number" class="input-client" onclick="removeInputError()">
+        <input value="{{number_address}}" type="number" name="number" id="number" class="input-client" onclick="removeInputError()">
       </div>
 
       <div class="div-clients">
         <div class="div-label">
           <label for="complement" class="">Complemento: </label>
         </div>
-        <input type="text" name="complement" id="complement" class="input-client" onclick="removeInputError()">
+        <input value="{{complement}}" type="text" name="complement" id="complement" class="input-client" onclick="removeInputError()">
       </div>
 
       <hr>
@@ -140,7 +140,7 @@
 {% endblock %}
 
 {% block script %}
-  <script src="/js/clients/add.js" charset="utf-8"></script>
+  <script src="/js/clients/edit.js" charset="utf-8"></script>
   <link rel="stylesheet" href="/styles/clients/add.css">
   <script>
     {% if input %}

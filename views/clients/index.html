@@ -11,23 +11,23 @@
   <span class="add-clients" style="text-align: center;"><a href="/admin/clients/add">Adicionar Cliente</a></span>
 </div>
 
-<div>
-    <table class="table table-hover">
+<div class="principal-content">
+    <table class="table table-striped table-hover">
       <thead>
-        <tr>
-          <th class="text-center" scope="col">id</th>
+        <tr class="table-header">
+          <th class="text-center coll-0-8" scope="col">id</th>
           <!-- <th class="text-center" scope="col">id</th> -->
-          <th class="text-center" scope="col">Nome</th>
-          <th class="text-center" scope="col">E-mail</th>
-          <th class="text-center" scope="col">Telefone</th>
-          <th class="text-center" scope="col">Celular</th>
+          <th class="text-left coll-3" scope="col">Nome</th>
+          <th class="text-left coll-2" scope="col">E-mail</th>
+          <th class="text-left coll-2" scope="col">Telefone</th>
+          <th class="text-center coll-2" scope="col">Celular</th>
           <!-- <th class="text-center" scope="col">CEP</th>
           <th class="text-center" scope="col">Estado</th>
           <th class="text-center" scope="col">Cidade</th>
           <th class="text-center" scope="col">Bairro</th>
           <th class="text-center" scope="col">Endereço</th>
           <th class="text-center" scope="col">Número</th> -->
-          <th class="text-center" scope="col"></th>
+          <th class="text-center coll-2" scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -35,10 +35,10 @@
         <tr>
           <th class="text-center" scope="row">{{client.id}}</th>
           <!-- <td class="text-center">132</td> -->
-          <td class="text-center">{{client.username}}</td>
-          <td class="text-center">{{client.email}}</td>
-          <td class="text-center">{{client.phone}}</td>
-          <td class="text-center">{{client.cellphone}}</td>
+          <td class="text-left">{{client.username}}</td>
+          <td class="text-left">{{client.email}}</td>
+          <td class="text-left">{{client.phone}}</td>
+          <td class="text-left">{{client.cellphone}}</td>
           <!-- <td class="text-center">{{client.cep}}</td>
           <td class="text-center">{{client.state}}</td>
           <td class="text-center">{{client.city}}</td>
@@ -46,9 +46,21 @@
           <td class="text-center">{{client.address}}</td>
           <td class="text-center">{{client.number_address}}</td> -->
           <td class="text-center">
-            <a href="/admin/clients/view/{{client.id}}"><button class="table-button btn btn-primary btn-sm" id="">Visualizar</button></a>
-            <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
-            <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
+            <a href="/admin/clients/view/{{client.id}}" target="_blank" class="link-no-blue">
+              <button class="table-button btn btn-primary btn-sm btn-select">
+                <img class="image-ico" src="/img/view.png" alt="Ver">
+              </button>
+            </a>
+            <a href="/admin/clients/edit/{{client.id}}" target="_blank" class="link-no-blue">
+              <button class="table-button btn btn-warning btn-sm btn-select">
+                <img class="image-ico" src="/img/edit.png" alt="Editar">
+              </button>
+            </a>
+            <a href="/admin/clients/delete/{{client.id}}" class="link-no-blue">
+              <button class="table-button btn btn-danger btn-sm btn-select">
+                <img class="image-ico" src="/img/delete.png" alt="Apagar">
+              </button>
+            </a>
           </td>
         </tr>
         {% endfor %}

@@ -116,7 +116,7 @@ app.get('/machines/add', isAdmin, (req, res) => {
 
 app.post('/clients/add', isAdmin, (req, res) => {
     var name = req.body.name;
-    var lastname = req.body.lastname;
+    // var lastname = req.body.lastname;
     var email = req.body.email;
     var phone = req.body.phone;
     var cell = req.body.cell;
@@ -137,10 +137,10 @@ app.post('/clients/add', isAdmin, (req, res) => {
         return sendRequestDataClient('name');
     }
 
-    if(lastname == "" || validateInput.test(lastname) == true) {
-        req.flash('error', 'Sobrenome do cliente inválido');
-        return sendRequestDataClient('lastname');
-    }
+    // if(lastname == "" || validateInput.test(lastname) == true) {
+    //     req.flash('error', 'Sobrenome do cliente inválido');
+    //     return sendRequestDataClient('lastname');
+    // }
 
     if(email == "" || regexEmail.test(email) == false) {
         req.flash('error', 'E-mail do cliente inválido');
@@ -198,7 +198,7 @@ app.post('/clients/add', isAdmin, (req, res) => {
             complement: complement,
             email: email,
             state: state,
-            username: name + " " + lastname,
+            username: name,
             phone: phone,
             input: input,
         });
@@ -214,7 +214,7 @@ app.post('/clients/add', isAdmin, (req, res) => {
         complement: req.body.complement,
         email: req.body.email,
         state: req.body.state,
-        username: req.body.name + " " + req.body.lastname,
+        username: req.body.name,
         phone: req.body.phone
     }).then(function() {
         req.flash('success', 'Cliente cadastrado com sucesso');
@@ -508,6 +508,17 @@ app.get('/orders/delete/:id', isAdmin, (req, res) => {
     res.redirect("/admin/orders");
 });
 
+app.get('/machines/delete/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+    Machine.destroy({
+        where: {
+            id: id
+        }
+    });
+    req.flash('success', 'Máquina excluída com sucesso');
+    res.redirect("/admin/machines");
+});
+
 app.get('/orders/edit/:id', isAdmin, (req, res) => {
     var id = req.params.id;
 
@@ -536,6 +547,209 @@ app.get('/orders/edit/:id', isAdmin, (req, res) => {
     })
 
 });
+
+app.get('/machines/edit/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+
+    Machine.findOne({
+        where: {
+            id: id
+        },
+
+    }).then((machine) => { 
+        res.render('machines/edit.html', {
+            machine_name: machine.machine_name,
+            conservation_state: machine.conservation_state,
+            id: id
+        });
+    })
+});
+
+app.get('/clients/edit/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+
+    Client.findOne({
+        where: {
+            id: id
+        },
+
+    }).then((client) => { 
+        res.render('clients/edit.html', {
+            username: client.username,
+            email: client.email,
+            phone: client.phone,
+            cellphone: client.cellphone,
+            cep: client.cep,
+            city: client.city,
+            district: client.district,
+            address: client.address,
+            number_address: client.number_address,
+            complement: client.complement,
+            id: id
+        });
+    })
+});
+
+app.post('/machines/edit/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+
+    var machine_name = req.body.machine_name;
+    var conservation_state = req.body.conservation_state;
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+
+    if(machine_name == "" || validateInput.test(machine_name) == true) {
+        req.flash('error', 'Nome da maquina inválido');
+        return sendRequestDataClient('machine_name');
+    }
+
+    if(conservation_state == "" || validateInput.test(conservation_state) == true) {
+        req.flash('error', 'Estado de conservação inválido');
+        return sendRequestDataClient('conservation_state');
+    }
+
+    function sendRequestDataClient(input) {
+        return res.render('machines/edit.html', {
+            machine_name: machine_name,
+            conservation_state: conservation_state,
+            input: input,
+            id: id
+        });
+    }
+
+    Machine.update({
+        machine_name: machine_name,
+        conservation_state: conservation_state
+        }, 
+        {
+            where: {
+                id: id
+        }
+    }).then(function() {
+        req.flash('success', 'Máquina atualizada com sucesso');
+        res.redirect('/admin/machines');
+    }).catch(function(error) {
+        req.flash('error', 'Não foi possível atualizar a máquina com sucesso. Erro: ' + error);
+        res.redirect('/admin/machines');
+    });
+})
+
+app.post('/clients/edit/:id', isAdmin, (req, res) => {
+    var id = req.params.id;
+    var name = req.body.name;
+    // var lastname = req.body.lastname;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var cell = req.body.cell;
+    var cep = req.body.cep;
+    var state = req.body.state;
+    var city = req.body.city;
+    var district = req.body.district;
+    var address = req.body.address;
+    var number = req.body.number;
+    var complement = req.body.complement;
+
+    var validateInput = /[@!#$%^&*()='+_"?°~`<>{}123456789\\]/;
+    var validateInput2 = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
+    var regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+    if(name == "" || validateInput.test(name) == true) {
+        req.flash('error', 'Nome do cliente inválido');
+        return sendRequestDataClient('name');
+    }
+
+    // if(lastname == "" || validateInput.test(lastname) == true) {
+    //     req.flash('error', 'Sobrenome do cliente inválido');
+    //     return sendRequestDataClient('lastname');
+    // }
+
+    if(email == "" || regexEmail.test(email) == false) {
+        req.flash('error', 'E-mail do cliente inválido');
+        return sendRequestDataClient('email');
+    }
+
+    if(phone == "" || phone.length != 14) {
+        req.flash('error', 'Telefone do cliente inválido');
+        return sendRequestDataClient('phone');
+    }
+
+    if(cell == "" || cell.length != 16) {
+        req.flash('error', 'Celular do cliente inválido');
+        return sendRequestDataClient('cell');
+    }
+
+    if(cep == "" || cep.length != 9) {
+        req.flash('error', 'CEP do cliente inválido');
+        return sendRequestDataClient('cep');
+    }
+
+    if(city == "" || validateInput.test(city) == true) {
+        req.flash('error', 'Cidade do cliente inválido');
+        return sendRequestDataClient('city');
+    }
+
+    if(district == "" || validateInput2.test(district) == true) {
+        req.flash('error', 'Bairro do cliente inválido');
+        return sendRequestDataClient('district');
+    }
+
+    if(address == "" || validateInput2.test(address) == true) {
+        req.flash('error', 'Endereço do cliente inválido');
+        return sendRequestDataClient('address');
+    }
+
+    if(number == "" || validateInput2.test(number) == true) {
+        req.flash('error', 'Número do cliente inválido');
+        return sendRequestDataClient('number');
+    }
+
+    if(complement == "" || validateInput2.test(complement) == true) {
+        req.flash('error', 'Complemento do cliente inválido');
+        return sendRequestDataClient('complement');
+    }
+
+    function sendRequestDataClient(input) {
+        return res.render('clients/edit.html', {
+            cellphone: cell,
+            cep: cep,
+            city: city,
+            district: district,
+            address: address,
+            number_address: number,
+            complement: complement,
+            email: email,
+            state: state,
+            username: name,
+            phone: phone,
+            input: input,
+            id: id
+        });
+    }
+
+    Client.update({
+        cellphone: req.body.cell,
+        cep: req.body.cep,
+        city: req.body.city,
+        district: req.body.district,
+        address: req.body.address,
+        number_address: req.body.number,
+        complement: req.body.complement,
+        email: req.body.email,
+        state: req.body.state,
+        username: req.body.name,
+        phone: req.body.phone
+    },{
+        where: {
+            id: id
+        }
+    }).then(function() {
+        req.flash('success', 'Cliente atualizado com sucesso');
+        res.redirect('/admin/clients');
+    }).catch(function(error) {
+        req.flash('error', 'Não foi possível atualizar o cliente com sucesso. Erro: ' + error);
+        res.redirect('/admin/clients');
+    });
+    // res.render('clients/add.html');
+})
 
 app.post('/orders/edit/:id', isAdmin, (req, res) => {
     var id = req.params.id;
@@ -571,7 +785,7 @@ app.post('/orders/edit/:id', isAdmin, (req, res) => {
                     }
 
                     function sendRequestData(input) {
-                        return res.render('orders/add.html', {
+                        return res.render('orders/edit.html', {
                             clientid: clientName,
                             service: serviceType,
                             machineid: machineType,
@@ -580,7 +794,8 @@ app.post('/orders/edit/:id', isAdmin, (req, res) => {
                             clients: clients,
                             machines: machines,
                             name: client.username,
-                            mname: machine.machine_name
+                            mname: machine.machine_name,
+                            id: id
                         });
                     }
                     
@@ -612,14 +827,6 @@ app.post('/orders/edit/:id', isAdmin, (req, res) => {
     }).catch((err) => {
         console.log('err: ' + err);
     });
-
-    // Order.update({ 
-         
-    // }, {
-    //     where: {
-    //       id: id
-    //     }
-    // }).then((user) => {}).catch((err) => {});
 });
 
 

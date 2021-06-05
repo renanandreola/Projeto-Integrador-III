@@ -11,15 +11,15 @@
   <span class="add-machines"><a href="/admin/machines/add">Cadastar máquina</a></span>
 </div>
 
-<div>
-    <table class="table table-hover">
+<div class="principal-content">
+    <table class="table table-striped table-hover">
       <thead>
-        <tr>
-          <th class="text-center" scope="col">id</th>
-          <th class="text-center" scope="col">Nome da Máquina</th>
-          <th class="text-center" scope="col">Estado de Conservação</th>
+        <tr class="table-header">
+          <th class="text-center coll-0-8" scope="col">id</th>
+          <th class="text-left col-4" scope="col">Nome da Máquina</th>
+          <th class="text-left col-4" scope="col">Estado de Conservação</th>
 
-          <th class="text-center" scope="col"></th>
+          <th class="text-center col-2" scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -27,14 +27,20 @@
         <tr>
           <th class="text-center" scope="row">{{machine.id}}</th>
 
-          <td class="text-center">{{machine.machine_name}}</td>
-          <td class="text-center">{{machine.conservation_state}}</td>
-
+          <td class="text-left">{{machine.machine_name}}</td>
+          <td class="text-left">{{machine.conservation_state}}</td>
 
           <td class="text-center">
-            <!-- <button class="table-button btn btn-primary btn-sm" id="">Visualizar</button> -->
-            <button class="table-button btn btn-warning btn-sm" id="">Editar</button>
-            <button class="table-button btn btn-danger btn-sm" id="">Excluir</button>
+            <a href="/admin/machines/edit/{{machine.id}}" target="_blank" class="link-no-blue">
+              <button class="table-button btn btn-warning btn-sm btn-select">
+                <img class="image-ico" src="/img/edit.png" alt="Editar">
+              </button>
+            </a>
+            <a href="/admin/machines/delete/{{machine.id}}" class="link-no-blue">
+              <button class="table-button btn btn-danger btn-sm btn-select">
+                <img class="image-ico" src="/img/delete.png" alt="Apagar">
+              </button>
+            </a>
           </td>
         </tr>
         {% endfor %}
