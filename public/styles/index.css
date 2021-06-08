@@ -21,3 +21,18 @@
     font-size: 20px;
     font-family: serif;
 } 
+
+.logout {
+    color: black;
+    background-color: #c9e9ff;
+    border-radius: 8px;
+    height: 35px;
+    width: 90px;
+    font-weight: bold;
+    font-size: 15px;
+    border: 1px solid black;
+}
+
+.logout:hover {
+    background-color: #83cdff;
+}
