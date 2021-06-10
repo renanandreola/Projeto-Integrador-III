@@ -32,10 +32,10 @@
             {% if clientid != 0 %}
               <option value="{{clientid}}">{{name}}</option>
             {% else %}
-              <option value="0"></option>
+              <option value="0" hidden></option>
             {% endif %}   
           {% else %}
-            <option value="0"></option>
+            <option value="0" hidden></option>
           {% endif %}
 
           {% for client in clients %}
@@ -64,10 +64,10 @@
             {% if machineid != 0 %}
               <option value="{{machineid}}">{{mname}}</option>
             {% else %}
-              <option value="0"></option>
+              <option value="0" hidden></option>
             {% endif %}   
           {% else %}
-            <option value="0"></option>
+            <option value="0" hidden></option>
           {% endif %}
 
           {% for machine in machines %}

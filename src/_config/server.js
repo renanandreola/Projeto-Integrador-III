@@ -1,12 +1,12 @@
 const express = require('express');
-const session = require('express-session');
+const session = require('cookie-session');
 const app = express();
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 const admin = require('../routes/admin');
 
 module.exports = () => {
-    var port = process.env.port;
+    var port = process.env.port || 3000;
 
     let env = nunjucks.configure('views', {
         autoescape: true,

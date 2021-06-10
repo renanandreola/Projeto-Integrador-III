@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const app = express.Router();
 const passport = require('passport');
 const flash = require('express-flash');
-const session = require('express-session');
+const session = require('cookie-session');
 const initializePassport = require('../_config/auth');
 initializePassport(passport);
 const {isAdmin} = require('../helpers/isAdmin');
