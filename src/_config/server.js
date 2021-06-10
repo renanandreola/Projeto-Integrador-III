@@ -6,7 +6,7 @@ const nunjucks = require('nunjucks');
 const admin = require('../routes/admin');
 
 module.exports = () => {
-    var port = process.env.port || 3000;
+    var port = process.env.port;
 
     let env = nunjucks.configure('views', {
         autoescape: true,
