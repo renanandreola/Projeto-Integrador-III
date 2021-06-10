@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/main.js",
-    "dev": "node -e * server.js",
-    "web": "node ./src/main.js" ,
+    "start": "nodemon ./src/main",
+    "dev": "nodemon -e * server.js",
+    "web": "node ./src/main" ,
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
