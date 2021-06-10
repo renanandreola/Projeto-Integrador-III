@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/main.js",
     "dev": "node -e * server.js",
-    "web": "node ./src/main.js" ,
+    "web": "node ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
