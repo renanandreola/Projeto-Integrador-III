@@ -1,9 +1,9 @@
 const express = require('express');
-const session = require('cookie-session');
+// const session = require('cookie-session');
 const app = express();
 const bodyParser = require('body-parser');
-const nunjucks = require('nunjucks');
-const admin = require('../routes/admin');
+// const nunjucks = require('nunjucks');
+// const admin = require('../routes/admin');
 
 module.exports = () => {
     var port = process.env.PORT || 3000;
