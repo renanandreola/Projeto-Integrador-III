@@ -61,7 +61,7 @@ module.exports = () => {
     //ROUTES
 
     app.get('/', (req, res) => {
-        redirect('/admin');
+        res.redirect('/admin');
     });
 
     //PRINCIPAL
