@@ -20,7 +20,7 @@ LTMAQ LAZZAROTTO
 ---
 
 ### Sobre
- O projeto **LTMAQ LAZZAROTTO** é um trabalho para a disciplina de Projeto Integrador III da instituição URI Erechim, do curso de Ciência da Computação 2020. Esse trabalho trata-se de uma implementação original para uma empresa da cidade de Erechim/RS
+ O projeto **LTMAQ LAZZAROTTO** é um trabalho para a disciplina de Projeto Integrador III da instituição URI Erechim, do curso de Ciência da Computação 2021. Esse trabalho trata-se de uma implementação original para uma empresa da cidade de Erechim/RS
 
  O trabalho representa um sistema administrativo com as seguintes funções:
  - Login de administrador;
