@@ -1,4 +1,16 @@
-const server = require('./_config/server');
-const database = require('./_config/database');
+// const server = require('./_config/server');
+// const database = require('./_config/database');
 
-server();
+// server();
+
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
