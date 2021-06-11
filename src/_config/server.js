@@ -835,10 +835,10 @@ module.exports = () => {
                             }
                         }).then(function() {
                             req.flash('success', 'Pedido atualizado com sucesso');
-                            res.redirect('/orders');
+                            res.redirect('/admin/orders');
                         }).catch(function(error) {
                             req.flash('error', 'Não foi possível atualizar com sucesso. Erro: ' + error);
-                            res.redirect('/orders');
+                            res.redirect('/admin/orders');
                         });
                     }).catch((err) => {
                         console.log('err: ' + err);
