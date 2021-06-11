@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-}
-
 const express = require('express');
 const app = express();
 const Order = require('../models/Order');
@@ -40,7 +36,7 @@ module.exports = () => {
 
     //SESSION
     app.use(session({
-        secret: process.env.SESSION_SECRET,
+        secret: 'keyboard catty',
         resave: false,
         saveUninitialized: false
     }));
