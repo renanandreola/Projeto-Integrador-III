@@ -1,5 +1,5 @@
 const express = require('express');
-// const session = require('cookie-session');
+const session = require('cookie-session');
 const app = express();
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
@@ -31,19 +31,18 @@ module.exports = () => {
     //ROUTES
         // inicial page
         app.get('/', (req,res) => {
-            // res.redirect('/');
-            res.render('index.html')
+            res.redirect('/');
             // res.send("AQUI")
         });
-        // app.use('/admin', admin)
+        app.use('/admin', admin)
 
-        // // register clients
-        // app.get('/register', (req, res) => {
-        //     res.redirect('/admin/register');
-        // });
+        // register clients
+        app.get('/register', (req, res) => {
+            res.redirect('/admin/register');
+        });
 
-        // // register orders
-        // app.get('/orders', (req, res) => {
-        //     res.redirect('/admin/orders');
-        // });
+        // register orders
+        app.get('/orders', (req, res) => {
+            res.redirect('/admin/orders');
+        });
 }
