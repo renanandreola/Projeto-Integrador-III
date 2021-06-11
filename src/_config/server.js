@@ -36,7 +36,7 @@ module.exports = () => {
 
     //SESSION
     app.use(session({
-        secret: 'keyboard catty',
+        secret: 'keyboard cat playing piano',
         resave: false,
         saveUninitialized: false
     }));
@@ -59,6 +59,10 @@ module.exports = () => {
     app.use(express.static('public'));
     
     //ROUTES
+
+    app.get('/', (req, res) => {
+        redirect('/admin');
+    });
 
     //PRINCIPAL
     app.get('/admin', isAdmin, (req, res) => {
