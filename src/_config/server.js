@@ -80,10 +80,10 @@ module.exports = () => {
     //LOGIN
     app.post('/admin/login', passport.authenticate('local', {
         failureRedirect: '/admin/login',
-        successRedirect: '/',
+        successRedirect: '/admin',
         failureFlash: true
     }), (req, res, next) => {
-        res.redirect('/');
+        res.redirect('/admin');
     });
     
     app.get('/admin/logout', isAdmin, (req, res) => {
