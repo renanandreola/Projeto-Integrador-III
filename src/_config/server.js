@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
-// const admin = require('../routes/admin');
+const admin = require('../routes/admin');
 
 module.exports = () => {
     var port = process.env.PORT || 3000;
