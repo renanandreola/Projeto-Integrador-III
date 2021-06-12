@@ -654,8 +654,16 @@ module.exports = () => {
 
         //ADD
     app.get('/admin/orders/add', isAdmin, (req, res) => {
-        Client.findAll().then((clients) => {
-            Machine.findAll().then((machines) => {
+        Client.findAll({
+            order: [
+                ['username', 'ASC']
+            ]
+        }).then((clients) => {
+            Machine.findAll({
+                order: [
+                    ['machine_name', 'ASC']
+                ]
+            }).then((machines) => {
                 res.render('orders/add.html', {clients: clients, machines: machines});
             }).catch((err) => {
                 console.log('err: ' + err);
@@ -757,8 +765,16 @@ module.exports = () => {
             include: [Client, Machine]
     
         }).then((order) => {
-            Client.findAll().then((clients) => {
-                Machine.findAll().then((machines) => {
+            Client.findAll({
+                order: [
+                    ['username', 'ASC']
+                ]
+            }).then((clients) => {
+                Machine.findAll({
+                    order: [
+                        ['machine_name', 'ASC']
+                    ]
+                }).then((machines) => {
                     res.render('orders/edit.html', {
                         service: order.service_type,
                         order: order.service_description,
