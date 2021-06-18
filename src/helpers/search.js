@@ -51,5 +51,26 @@ module.exports = {
         }
         
         return conditions;
+    },
+
+    searchMachine: function (id, machinename) {
+        //conditions = {id: 42};
+        //conditions = Object.assign(conditions, {a: b});
+
+        var conditions = {};
+
+        if(id != '') {
+            conditions = Object.assign(conditions, {id: id});
+        }
+        if(machinename != '') {
+            conditions = Object.assign(conditions, {
+                machine_name: {
+                    [Op.iLike]: '%'+machinename+'%'
+                }
+            });
+        }
+        
+        
+        return conditions;
     }
 }
