@@ -399,14 +399,112 @@ module.exports = () => {
 
     //MACHINES
         //PRINCIPAL - LIST - FILTER
+    // app.get('/admin/machines', isAdmin, (req, res) => {
+    //     Machine.findAll()
+    //     .then((machines) => {
+    //         res.render('machines/index.html', {machines: machines});
+    //     }).catch((err) => {
+    //         console.log("err: ", err);
+    //     });
+    // });
+
+    //
     app.get('/admin/machines', isAdmin, (req, res) => {
-        Machine.findAll()
-        .then((machines) => {
-            res.render('machines/index.html', {machines: machines});
+
+        //Count how many query strings are in  the url
+        var countQuery = 0;
+        for (i in req.query) {
+            countQuery++;
+        }
+    
+        let {
+            order = 'DESC',
+            limit = 10,
+            page = 1,
+            column = 'id',
+            id = '',
+            machinename = '',
+        } = req.query;
+    
+        var conditions = {};
+        // //Tests if search is disabled
+        if(id != '' || machinename != '') {
+            //Search Enabled
+            conditions = search.searchMachine(id, machinename);
+            console.log("conditions: ", conditions);
+        }
+    
+        // //Tests if column query string have a foreign key
+        var ordenation = [column, order];
+    
+        limit = parseInt(limit);
+        page = parseInt(page - 1);
+    
+        Machine.findAndCountAll({
+            order: [
+                [ordenation]
+            ],
+            where: conditions,
+            limit: limit,
+            offset: page * limit
+        }).then(({count: quantity, rows: machines}) => {
+            console.log("QUANTITY: ", quantity);
+            //Calc pagination
+            //init will ever be 1
+            //last depends of quantity and limit
+            pages = [];
+            last = quantity / limit;
+            last = Math.ceil(last);
+            console.log("LAST: ", last);
+    
+            if(page + 1 <= 3) {
+                if(last < 5) {
+                    if(last == 4) {
+                        pages = [1, 2, 3, 4]
+                    } else if(last == 3) {
+                        pages = [1, 2, 3]
+                    } else if (last == 2) {
+                        pages = [1, 2]
+                    } else {
+                        pages = [1]
+                    }
+                } else {
+                    pages = [1, 2, 3, 4, 5];
+                } 
+            } else if ((last - (page + 1)) < 2) {  
+                if(last < 5) {
+                    if(last == 4) {
+                        pages = [last - 3, last - 2, last - 1, last]
+                    } else if(last == 3) {
+                        pages = [last - 2, last - 1, last]
+                    } else if (last == 2) {
+                        pages = [last - 1, last]
+                    } else {
+                        pages = [last];
+                    }
+                } else {
+                    pages = [last -4, last - 3, last - 2, last - 1, last];
+                }    
+            } else {
+                pages = [page - 1, page, page + 1, page + 2, page + 3];
+            }
+            
+            res.render('machines/index.html', 
+            {
+                machines: machines,
+                offset: (page * limit) + 1,
+                count: countQuery,
+                order: order,
+                queries: req.query,
+                pages: pages,
+                last: last
+            });
+           
         }).catch((err) => {
             console.log("err: ", err);
         });
-    });
+    }); 
+    //
     
     app.get('/admin/machines/index', isAdmin, (req, res) => {
         res.redirect('/admin/machines');

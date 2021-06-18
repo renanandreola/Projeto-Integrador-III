@@ -12,12 +12,42 @@
 </div>
 
 <div class="principal-content">
+
+  <form method="GET" action="/admin/machines">
+      <div class="search-box">
+        <h2>Filtrar Máquinas</h2>
+
+        <div class="search-inputs">
+
+          <input class="search-input-text left" name="id" id="id" placeholder="Id" >
+
+          <!-- <select class="search-input-text" name="machinename" id="machine-name">
+            <option value="0" selected disabled hidden>Nome da Máquina</option>
+            {% for machine in machines %}
+              <option value="{{machine.id}}">{{machine.machine_name}}</option>
+            {% endfor %}
+          </select> -->
+
+          <input type="text" name="machinename" id="machine-name">
+
+          <button type="submit" class="button-right">Buscar</button>
+        </div>
+      </div>
+    </form>
+
     <table class="table table-striped table-hover">
       <thead>
         <tr class="table-header">
-          <th class="text-center coll-0-8" scope="col">id</th>
-          <th class="text-left col-4" scope="col">Nome da Máquina</th>
-          <th class="text-left col-4" scope="col">Estado de Conservação</th>
+          <!-- <th class="text-center coll-0-8" scope="col">id</th> -->
+          <th class="text-center coll-0-8" scope="col">
+            <a class="link-no-blue" href="/admin/machines?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=id{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">ID {%if order == 'ASC' and queries.column == 'id'%}↓{%elif order == 'DESC' and queries.column == 'id'%}↑{%endif%}</a>
+          </th>
+          <th class="text-left col-4" scope="col">
+            <a class="link-no-blue" href="/admin/machines?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=machine_name{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">Nome da Máquina {%if order == 'ASC' and queries.column == 'machine_name'%}↓{%elif order == 'DESC' and queries.column == 'machine_name'%}↑{%endif%}</a>
+          </th>
+          <th class="text-left col-4" scope="col">
+            <a class="link-no-blue" href="/admin/machines?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=conservation_state{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">Estado de Conservação {%if order == 'ASC' and queries.column == 'conservation_state'%}↓{%elif order == 'DESC' and queries.column == 'conservation_state'%}↑{%endif%}</a>
+          </th>
 
           <th class="text-center col-2" scope="col">Ações</th>
         </tr>
@@ -46,6 +76,14 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <div class="pagination" style="width: {{(pages.length + 2) * 42}}px;">
+      <a href="/admin/machines?page=1{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">&laquo;</a>
+        {% for page in pages %}
+          <a {%if queries.page == page%}class="active"{%elif queries.page == undefined and page == 1%}class="active"{%endif%} href="/admin/machines?page={{page}}{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">{{page}}</a>
+        {% endfor %}
+      <a href="/admin/machines?page={{last}}{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">&raquo;</a>
+    </div>
 </div>
 
 {% endblock %}
