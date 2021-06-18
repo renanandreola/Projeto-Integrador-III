@@ -15,7 +15,7 @@
 
   <form method="GET" action="/admin/machines">
       <div class="search-box">
-        <h2>Filtrar Máquinas</h2>
+        <h2 style="font-size: 22px; margin-bottom: 20px;">Filtrar Máquinas</h2>
 
         <div class="search-inputs">
 
@@ -28,7 +28,7 @@
             {% endfor %}
           </select> -->
 
-          <input type="text" name="machinename" id="machine-name">
+          <input class="search-input-text" type="text" name="machinename" id="machine-name" placeholder="Nome da Máquina">
 
           <button type="submit" class="button-right">Buscar</button>
         </div>
