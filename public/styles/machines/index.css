@@ -19,3 +19,14 @@
 .table-button {
     width: 80px;
 }
+
+.button-right {
+    width: 20%;
+    background-color: #085b96;
+    color: white;
+    border: solid 2px #00308a;
+    border-radius: 5px;
+    height: 40px;
+    font-weight: bold;
+    float: right;
+}
