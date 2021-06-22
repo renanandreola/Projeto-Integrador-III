@@ -1,73 +1,19 @@
-// document.ready(function(){
-//     console.log("registered-orders loaded");
-//     var formatDate = $("#orderDate").val();
-//     console.log(formatDate);
-// })
+var ordersDates = document.getElementsByClassName('orderDate');
 
-console.log("registered-orders loaded");
-var formatDate = document.getElementsByClassName('orderDate');
+for(var i = 0; i < ordersDates.length; i++) {
+    let date = new Date(ordersDates[i].innerText);
 
-for(var i = 0; i < formatDate.length; i++) {
-    var a = formatDate[i].innerHTML.split(" ");
-    var day = a[2];
-    var month = a[1];
-    var year = a[3];
-    var hour = a[4].substr(0, 5);
+    var fullDate = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + '/' + (date.getMonth() < 10 ? "0" +  date.getMonth() : date.getMonth()) + '/' + date.getFullYear() + 
+    " às " + (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes());
 
-    switch (month) {
-        case 'Jan':
-            month = '01';
-            break;
+   ordersDates[i].innerText = fullDate;
 
-        case 'Feb':
-            month = '02';
-            break;
+}
 
-        case 'Mar':
-            month = '03';
-            break;
+function confirmDelete(id) {
+    var answer = confirm('Deseja realmente remover o registro ' + id + '?');
 
-        case 'Apr':
-            month = '04';
-            break;
-
-        case 'May':
-            month = '05';
-            break;
-
-        case 'Jun':
-            month = '06';
-            break;
-
-        case 'Jul':
-            month = '07';
-            break;
-        
-        case 'Aug':
-            month = '08';
-            break;
-
-        case 'Sep':
-            month = '09';
-            break;
-
-        case 'Oct':
-            month = '10';
-            break;
-
-        case 'Nov':
-            month = '11';
-            break;
-
-        case 'Dec':
-            month = '12';
-            break;
-
-        default:
-            month = '00';
-            break;
+    if(answer) {
+        window.location.href = "/admin/orders/delete/" + id;
     }
-
-    var orderDate = (day+"/"+month+"/"+year + " às " + hour);
-    formatDate[i].innerHTML = orderDate;
 }

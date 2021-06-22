@@ -72,5 +72,36 @@ module.exports = {
         
         
         return conditions;
+    },
+
+    searchClient: function (id, username, state, city)  {
+        //conditions = {id: 42};
+        //conditions = Object.assign(conditions, {a: b});
+
+        var conditions = {};
+
+        if(id != '') {
+            conditions = Object.assign(conditions, {id: id});
+        }
+        if(username != '') {
+            conditions = Object.assign(conditions, {
+                username: {
+                    [Op.iLike]: '%'+username+'%'
+                }
+            });
+        }
+        if(state != '') {
+            conditions = Object.assign(conditions, {state: state});
+        }
+
+        if(city != '') {
+            conditions = Object.assign(conditions, {
+                city: {
+                    [Op.iLike]: '%'+city+'%'
+                }
+            });
+        }
+        
+        return conditions;
     }
 }

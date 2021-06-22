@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/main.js",
+    "start": "nodemon ./src/main.js",
     "dev": "node -e * server.js",
     "web": "node ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +26,7 @@
     "jquery": "^3.6.0",
     "jquery-mask-plugin": "^1.14.16",
     "md5": "^2.3.0",
+    "moment": "^2.29.1",
     "mongoose": "^5.12.5",
     "nunjucks": "^3.2.3",
     "passport": "^0.4.1",

@@ -91,12 +91,95 @@ module.exports = () => {
         res.redirect('/admin/login');
     });
 
-    //CLIENTS
-        //PRINCIPAL - LIST - FILTER
     app.get('/admin/clients', isAdmin, (req, res) => {
-        Client.findAll()
-        .then((clients) => {
-            res.render('clients/index.html', {clients: clients});
+        //Count how many query strings are in  the url
+        var countQuery = 0;
+
+        for (i in req.query) {
+            countQuery++;
+        }
+    
+        let {
+            order = 'DESC',
+            limit = 15,
+            page = 1,
+            column = 'id',
+            id = '',
+            username = '',
+            state = '',
+            city = ''
+        } = req.query;
+    
+        var conditions = {};
+        //Tests if search is disabled
+        if(id != '' || username != '' || state != '' || city != '') {
+            //Search Enabled
+            conditions = search.searchClient(id, username, state, city);
+        }
+    
+        var ordenation = [column, order];
+    
+        limit = parseInt(limit);
+        page = parseInt(page - 1);
+    
+        Client.findAndCountAll({
+            order: [
+                [ordenation]
+            ],
+            where: conditions,
+            limit: limit,
+            offset: page * limit
+        }).then(({count: quantity, rows: clients}) => {
+    
+            //Calc pagination
+            //init will ever be 1
+            //last depends of quantity and limit
+            pages = [];
+            last = quantity / limit;
+            last = Math.ceil(last);
+    
+            if(page + 1 <= 3) {
+                if(last < 5) {
+                    if(last == 4) {
+                        pages = [1, 2, 3, 4]
+                    } else if(last == 3) {
+                        pages = [1, 2, 3]
+                    } else if (last == 2) {
+                        pages = [1, 2]
+                    } else {
+                        pages = [1]
+                    }
+                } else {
+                    pages = [1, 2, 3, 4, 5];
+                } 
+            } else if ((last - (page + 1)) < 2) {  
+                if(last < 5) {
+                    if(last == 4) {
+                        pages = [last - 3, last - 2, last - 1, last]
+                    } else if(last == 3) {
+                        pages = [last - 2, last - 1, last]
+                    } else if (last == 2) {
+                        pages = [last - 1, last]
+                    } else {
+                        pages = [last];
+                    }
+                } else {
+                    pages = [last -4, last - 3, last - 2, last - 1, last];
+                }    
+            } else {
+                pages = [page - 1, page, page + 1, page + 2, page + 3];
+            }
+            
+            res.render('clients/index.html', 
+            {
+                clients: clients,
+                offset: (page * limit) + 1,
+                count: countQuery,
+                order: order,
+                queries: req.query,
+                pages: pages,
+                last: last
+            });
         }).catch((err) => {
             console.log("err: ", err);
         });
@@ -358,7 +441,7 @@ module.exports = () => {
                 id: id
             }
         }).then(function() {
-            req.flash('success', 'Cliente atualizado com sucesso');
+            req.flash('success', 'Cliente ' + id + ' atualizado com sucesso');
             res.redirect('/admin/clients');
         }).catch(function(error) {
             req.flash('error', 'Não foi possível atualizar o cliente com sucesso. Erro: ' + error);
@@ -393,22 +476,10 @@ module.exports = () => {
                 id: id
             }
         });
-        req.flash('success', 'Cliente excluído com sucesso');
+        req.flash('success', 'Cliente ' + id + ' excluído com sucesso');
         res.redirect("/admin/clients");
     });
 
-    //MACHINES
-        //PRINCIPAL - LIST - FILTER
-    // app.get('/admin/machines', isAdmin, (req, res) => {
-    //     Machine.findAll()
-    //     .then((machines) => {
-    //         res.render('machines/index.html', {machines: machines});
-    //     }).catch((err) => {
-    //         console.log("err: ", err);
-    //     });
-    // });
-
-    //
     app.get('/admin/machines', isAdmin, (req, res) => {
 
         //Count how many query strings are in  the url
@@ -419,7 +490,7 @@ module.exports = () => {
     
         let {
             order = 'DESC',
-            limit = 10,
+            limit = 15,
             page = 1,
             column = 'id',
             id = '',
@@ -431,7 +502,6 @@ module.exports = () => {
         if(id != '' || machinename != '') {
             //Search Enabled
             conditions = search.searchMachine(id, machinename);
-            console.log("conditions: ", conditions);
         }
     
         // //Tests if column query string have a foreign key
@@ -448,14 +518,12 @@ module.exports = () => {
             limit: limit,
             offset: page * limit
         }).then(({count: quantity, rows: machines}) => {
-            console.log("QUANTITY: ", quantity);
             //Calc pagination
             //init will ever be 1
             //last depends of quantity and limit
             pages = [];
             last = quantity / limit;
             last = Math.ceil(last);
-            console.log("LAST: ", last);
     
             if(page + 1 <= 3) {
                 if(last < 5) {
@@ -603,7 +671,7 @@ module.exports = () => {
                     id: id
             }
         }).then(function() {
-            req.flash('success', 'Máquina atualizada com sucesso');
+            req.flash('success', 'Máquina ' + id + ' atualizada com sucesso');
             res.redirect('/admin/machines');
         }).catch(function(error) {
             req.flash('error', 'Não foi possível atualizar a máquina com sucesso. Erro: ' + error);
@@ -619,7 +687,7 @@ module.exports = () => {
                 id: id
             }
         });
-        req.flash('success', 'Máquina excluída com sucesso');
+        req.flash('success', 'Máquina ' + id + ' excluída com sucesso');
         res.redirect("/admin/machines");
     });
     
@@ -651,7 +719,6 @@ module.exports = () => {
         if(id != '' || service != '' || clientname != '' || machinename != '' || start != '' || end != '') {
             //Search Enabled
             conditions = search.searchOrder(id, service, clientname, machinename, start, end);
-            console.log(conditions);
         }
     
         //Tests if column query string have a foreign key
@@ -948,7 +1015,7 @@ module.exports = () => {
                                 id: id
                             }
                         }).then(function() {
-                            req.flash('success', 'Pedido atualizado com sucesso');
+                            req.flash('success', 'Pedido ' + id + ' atualizado com sucesso');
                             res.redirect('/admin/orders');
                         }).catch(function(error) {
                             req.flash('error', 'Não foi possível atualizar com sucesso. Erro: ' + error);
@@ -995,7 +1062,7 @@ module.exports = () => {
                 id: id
             }
         });
-        req.flash('success', 'Pedido excluído com sucesso');
+        req.flash('success', 'Pedido ' + id + ' excluído com sucesso');
         res.redirect("/admin/orders");
     });
 }

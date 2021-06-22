@@ -6,12 +6,10 @@
 
 {% block content %}
 
-<div class="div-title-registered-machines">
-  <h1 class="text-center" id="title-page-registered-machines">Máquinas Cadastradas</h1>
-  <span class="add-machines"><a href="/admin/machines/add">Cadastrar máquina</a></span>
-</div>
-
 <div class="principal-content">
+  <div class="title-box">
+    <h1>Máquinas Cadastradas</h1>
+  </div>
 
   <form method="GET" action="/admin/machines">
       <div class="search-box">
@@ -55,7 +53,7 @@
       <tbody>
         {% for machine in machines %}
         <tr>
-          <th class="text-center" scope="row">{{machine.id}}</th>
+          <td class="text-center" style="font-weight: bold;" scope="row">{{machine.id}}</th>
 
           <td class="text-left">{{machine.machine_name}}</td>
           <td class="text-left">{{machine.conservation_state}}</td>
@@ -66,7 +64,7 @@
                 <img class="image-ico" src="/img/edit.png" alt="Editar">
               </button>
             </a>
-            <a href="/admin/machines/delete/{{machine.id}}" class="link-no-blue">
+            <a onclick = "confirmDelete({{machine.id}}, '{{machine.machine_name}}');" class="link-no-blue">
               <button class="table-button btn btn-danger btn-sm btn-select">
                 <img class="image-ico" src="/img/delete.png" alt="Apagar">
               </button>

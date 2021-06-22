@@ -6,45 +6,81 @@
 
 {% block content %}
 
-<div class="div-title-registered-clients">
-  <h1 class="text-center" id="title-page-registered-clients">Clientes Cadastrados</h1>
-  <span class="add-clients" style="text-align: center;"><a href="/admin/clients/add">Adicionar Cliente</a></span>
-</div>
-
 <div class="principal-content">
+    <div class="title-box">
+      <h1>Clientes Cadastrados</h1>
+      <a href="/admin/orders/add">Novo Cliente</a>
+    </div>
+
+    <form method="GET" action="/admin/clients">
+      <div class="search-box">
+        <h2>Filtrar Clientes</h2>
+
+        <div class="search-inputs">
+          <input class="search-input-text left" name="id" id="id" placeholder="Id">
+          <input class="search-input-text right" name="username" id="username" placeholder="Nome">
+          <select name="state" id="state" class="search-input-text left">
+            <option value="" hidden>Estado</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+            <option value="OT">Outro</option>
+          </select>
+          <input class="search-input-text right" name="city" id="city" placeholder="Cidade">
+          <button type="submit" class="button-right">Buscar</button>
+        </div>
+      </div>
+    </form>
+
     <table class="table table-striped table-hover">
       <thead>
         <tr class="table-header">
-          <th class="text-center coll-0-8" scope="col">id</th>
-          <!-- <th class="text-center" scope="col">id</th> -->
-          <th class="text-left coll-3" scope="col">Nome</th>
-          <th class="text-left coll-2" scope="col">E-mail</th>
+          <th class="text-center coll-0-8" scope="col">
+            <a class="link-no-blue" href="/admin/clients?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=id{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">ID {%if order == 'ASC' and queries.column == 'id'%}↓{%elif order == 'DESC' and queries.column == 'id'%}↑{%endif%}</a>
+          </th>
+          <th class="text-left coll-3" scope="col">
+            <a class="link-no-blue" href="/admin/clients?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=username{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">Nome {%if order == 'ASC' and queries.column == 'username'%}↓{%elif order == 'DESC' and queries.column == 'username'%}↑{%endif%}</a>
+          </th>
+          <th class="text-left coll-2" scope="col">
+            <a class="link-no-blue" href="/admin/clients?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=email{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">E-mail {%if order == 'ASC' and queries.column == 'email'%}↓{%elif order == 'DESC' and queries.column == 'email'%}↑{%endif%}</a>
+          </th>
           <th class="text-left coll-2" scope="col">Telefone</th>
           <th class="text-left coll-2" scope="col">Celular</th>
-          <!-- <th class="text-center" scope="col">CEP</th>
-          <th class="text-center" scope="col">Estado</th>
-          <th class="text-center" scope="col">Cidade</th>
-          <th class="text-center" scope="col">Bairro</th>
-          <th class="text-center" scope="col">Endereço</th>
-          <th class="text-center" scope="col">Número</th> -->
           <th class="text-center coll-2" scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
         {% for client in clients %}
         <tr>
-          <th class="text-center" scope="row">{{client.id}}</th>
-          <!-- <td class="text-center">132</td> -->
+          <td class="text-center" style="font-weight: bold;" scope="row">{{client.id}}</th>
           <td class="text-left">{{client.username}}</td>
           <td class="text-left">{{client.email}}</td>
           <td class="text-left">{{client.phone}}</td>
           <td class="text-left">{{client.cellphone}}</td>
-          <!-- <td class="text-center">{{client.cep}}</td>
-          <td class="text-center">{{client.state}}</td>
-          <td class="text-center">{{client.city}}</td>
-          <td class="text-center">{{client.district}}</td>
-          <td class="text-center">{{client.address}}</td>
-          <td class="text-center">{{client.number_address}}</td> -->
           <td class="text-center">
             <a href="/admin/clients/view/{{client.id}}" target="_blank" class="link-no-blue">
               <button class="table-button btn btn-primary btn-sm btn-select">
@@ -56,7 +92,7 @@
                 <img class="image-ico" src="/img/edit.png" alt="Editar">
               </button>
             </a>
-            <a href="/admin/clients/delete/{{client.id}}" class="link-no-blue">
+            <a onclick = "confirmDelete({{client.id}}, '{{client.username}}');" class="link-no-blue">
               <button class="table-button btn btn-danger btn-sm btn-select">
                 <img class="image-ico" src="/img/delete.png" alt="Apagar">
               </button>
@@ -66,6 +102,15 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <div class="pagination" style="width: {{(pages.length + 2) * 42}}px;">
+      <a href="/admin/clients?page=1{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">&laquo;</a>
+        {% for page in pages %}
+          <a {%if queries.page == page%}class="active"{%elif queries.page == undefined and page == 1%}class="active"{%endif%} href="/admin/clients?page={{page}}{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">{{page}}</a>
+        {% endfor %}
+      <a href="/admin/clients?page={{last}}{%if count > 0%}{%for var, query in queries%}{%if var != 'page'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">&raquo;</a>
+    </div>
+
 </div>
 
 {% endblock %}
