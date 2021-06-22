@@ -6,45 +6,47 @@
 
 {% block content %}
 
-<div class="title-view-order">
-    <span class="span-view-order">Detalhes do Pedido</span>
+<div class="title-box-view">
+    <span class="span-view-order">Detalhes do Pedido #{{order.id}}</span>
 </div>
 
-<div class="content-info-orders">
-    <div class="card-info-order">
-        <span class="span-content-order">ID: </span>
-        <span class="dynamic-contents">{{order.id}}</span>
+<div class="body-view">
+    <div class="content-info-orders">
+        <div class="card-info-order">
+            <span class="span-content-order">ID: </span>
+            <span class="dynamic-contents">{{order.id}}</span>
+        </div>
+
+        <div class="card-info-order">
+            <span class="span-content-order">Nome do Cliente: </span>
+            <span class="dynamic-contents">{{order.client.username}}</span>
+        </div>
+
+        <div class="card-info-order">
+            <span class="span-content-order">Tipo do Serviço: </span>
+            <span class="dynamic-contents">{{order.service_type}}</span>
+        </div>
+
+        <div class="card-info-order">
+            <span class="span-content-order">Tipo da Máquina: </span>
+            <span class="dynamic-contents">{{order.machine.machine_name}}</span>
+        </div>
+
+        <div class="card-info-order">
+            <span class="span-content-order">Hora do Pedido: </span>
+            <span class="dynamic-contents">{{order.createdAt}}</span>
+        </div>
+        
+        <div class="card-info-order">
+            <span class="span-content-order">Descrição do Serviço: </span>
+            <span class="dynamic-contents">{{order.service_description}}</span>
+        </div>
     </div>
 
-    <div class="card-info-order">
-        <span class="span-content-order">Nome do Cliente: </span>
-        <span class="dynamic-contents">{{order.client.username}}</span>
+    <div class="print-button">
+        <input class="btn-print" type="button" value="Imprimir página" onClick="window.print()"/>
     </div>
-
-    <div class="card-info-order">
-        <span class="span-content-order">Tipo do Serviço: </span>
-        <span class="dynamic-contents">{{order.service_type}}</span>
-    </div>
-
-    <div class="card-info-order">
-        <span class="span-content-order">Tipo da Máquina: </span>
-        <span class="dynamic-contents">{{order.machine.machine_name}}</span>
-    </div>
-
-    <div class="card-info-order">
-        <span class="span-content-order">Hora do Pedido: </span>
-        <span class="dynamic-contents">{{order.createdAt}}</span>
-    </div>
-    
-    <div class="card-info-order">
-        <span class="span-content-order">Descrição do Serviço: </span>
-        <span class="dynamic-contents">{{order.service_description}}</span>
-    </div>
-</div>
-
-<div class="print-button">
-    <input class="btn-print" type="button" value="Imprimir página" onClick="window.print()"/>
-</div>
+<div>
 
 {% endblock %}
 

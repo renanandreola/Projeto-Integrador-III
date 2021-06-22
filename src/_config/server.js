@@ -316,6 +316,9 @@ module.exports = () => {
             },
     
         }).then((client) => { 
+            if(!client) {
+                return res.render('notFound.html');
+            }
             res.render('clients/edit.html', {
                 username: client.username,
                 email: client.email,
@@ -628,6 +631,9 @@ module.exports = () => {
             },
     
         }).then((machine) => { 
+            if(!machine) {
+                return res.render('notFound.html');
+            }
             res.render('machines/edit.html', {
                 machine_name: machine.machine_name,
                 conservation_state: machine.conservation_state,
@@ -930,6 +936,9 @@ module.exports = () => {
             include: [Client, Machine]
     
         }).then((order) => {
+            if(!order) {
+                return res.render('notFound.html');
+            }
             Client.findAll({
                 order: [
                     ['username', 'ASC']
@@ -941,8 +950,9 @@ module.exports = () => {
                     ]
                 }).then((machines) => {
                     res.render('orders/edit.html', {
+                        order: order,
                         service: order.service_type,
-                        order: order.service_description,
+                        description: order.service_description,
                         clientid: order.clientId,
                         name: order.client.username,
                         clients: clients,
@@ -995,7 +1005,7 @@ module.exports = () => {
                                 clientid: clientName,
                                 service: serviceType,
                                 machineid: machineType,
-                                order: orderDescription,
+                                description: orderDescription,
                                 input: input,
                                 clients: clients,
                                 machines: machines,

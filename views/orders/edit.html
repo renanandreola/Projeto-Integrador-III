@@ -7,8 +7,9 @@
 {% block content %}
 
 <form action="/admin/orders/edit/{{id}}" method="post">
-  <div class="div-title-page-orders">
-    <h1 class="text-center" id="title-page-orders">Editar Pedido</h1>
+
+  <div class="title-box-view">
+    <span>Editar Pedido #{{order.id}}</span>
   </div>
 
 <!-- <div class="aux-add" style="display: flex; width: 100%; justify-content: center;">
@@ -84,7 +85,7 @@
         <div class="div-label">
           <label for="order-description" class="">Descrição do serviço: </label>
         </div>
-        <textarea name="orderdescription" id="order-description" cols="30" rows="4" onclick="removeInputError()">{{order}}</textarea>
+        <textarea name="orderdescription" id="order-description" cols="30" rows="4" onclick="removeInputError()">{{description}}</textarea>
       </div>
       
       <hr>
