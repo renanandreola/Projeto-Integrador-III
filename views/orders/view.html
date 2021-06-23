@@ -20,6 +20,57 @@
         <div class="card-info-order">
             <span class="span-content-order">Nome do Cliente: </span>
             <span class="dynamic-contents">{{order.client.username}}</span>
+            <span class="dynamic-contents span-content-info" id="switch" onClick="activateClientInfo();"> + Informações</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">E-mail do Cliente: </span>
+            <span class="dynamic-contents">{{order.client.email}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Celular do Cliente: </span>
+            <span class="dynamic-contents">{{order.client.cellphone}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Telefone do Cliente: </span>
+            <span class="dynamic-contents">{{order.client.phone}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">CEP: </span>
+            <span class="dynamic-contents">{{order.client.cep}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Endereço do Cliente: </span>
+            <span class="dynamic-contents">{{order.client.address}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Número: </span>
+            <span class="dynamic-contents">{{order.client.number_address}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Complemento: </span>
+            <span class="dynamic-contents">{{order.client.complement}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Bairro: </span>
+            <span class="dynamic-contents">{{order.client.district}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Cidade: </span>
+            <span class="dynamic-contents">{{order.client.city}}</span>
+        </div>
+
+        <div class="card-info-order ocult">
+            <span class="span-content-order">Estado: </span>
+            <span class="dynamic-contents">{{order.client.state}}</span>
         </div>
 
         <div class="card-info-order">
@@ -33,8 +84,13 @@
         </div>
 
         <div class="card-info-order">
+            <span class="span-content-order">Estado de conservação da Máquina: </span>
+            <span class="dynamic-contents">{{order.conservation_status}}</span>
+        </div>
+
+        <div class="card-info-order">
             <span class="span-content-order">Hora do Pedido: </span>
-            <span class="dynamic-contents">{{order.createdAt}}</span>
+            <span class="dynamic-contents orderDate">{{order.createdAt}}</span>
         </div>
         
         <div class="card-info-order">

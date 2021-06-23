@@ -49,6 +49,18 @@
     padding-left: 10px;
 }
 
+.span-content-info {
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 10px;
+    color: rgb(0, 110, 255);
+}
+
+.span-content-info:hover{
+    color: white;
+    cursor: pointer;
+}
+
 .print-button {
     height: 50px;
     align-items: center;
