@@ -40,11 +40,8 @@
           <th class="text-center coll-0-8" scope="col">
             <a class="link-no-blue" href="/admin/machines?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=id{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">ID {%if order == 'ASC' and queries.column == 'id'%}↓{%elif order == 'DESC' and queries.column == 'id'%}↑{%endif%}</a>
           </th>
-          <th class="text-left col-4" scope="col">
+          <th class="text-left col-9" scope="col">
             <a class="link-no-blue" href="/admin/machines?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=machine_name{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">Nome da Máquina {%if order == 'ASC' and queries.column == 'machine_name'%}↓{%elif order == 'DESC' and queries.column == 'machine_name'%}↑{%endif%}</a>
-          </th>
-          <th class="text-left col-4" scope="col">
-            <a class="link-no-blue" href="/admin/machines?{%if order == 'ASC'%}order=DESC{%else%}order=ASC{%endif%}&column=conservation_state{%if count > 0%}{%for var, query in queries %}{%if var != 'order' and var != 'column'%}&{{var}}={{query}}{%endif%}{%endfor%}{%endif%}">Estado de Conservação {%if order == 'ASC' and queries.column == 'conservation_state'%}↓{%elif order == 'DESC' and queries.column == 'conservation_state'%}↑{%endif%}</a>
           </th>
 
           <th class="text-center col-2" scope="col">Ações</th>
@@ -56,7 +53,6 @@
           <td class="text-center" style="font-weight: bold;" scope="row">{{machine.id}}</th>
 
           <td class="text-left">{{machine.machine_name}}</td>
-          <td class="text-left">{{machine.conservation_state}}</td>
 
           <td class="text-center">
             <a href="/admin/machines/edit/{{machine.id}}" target="_blank" class="link-no-blue">

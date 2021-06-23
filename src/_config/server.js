@@ -483,6 +483,7 @@ module.exports = () => {
         res.redirect("/admin/clients");
     });
 
+    //MACHINES
     app.get('/admin/machines', isAdmin, (req, res) => {
 
         //Count how many query strings are in  the url
@@ -575,7 +576,6 @@ module.exports = () => {
             console.log("err: ", err);
         });
     }); 
-    //
     
     app.get('/admin/machines/index', isAdmin, (req, res) => {
         res.redirect('/admin/machines');
@@ -588,7 +588,6 @@ module.exports = () => {
     
     app.post('/admin/machines/add', isAdmin, (req, res) => {
         var machine_name = req.body.machine_name;
-        var conservation_state = req.body.conservation_state;
         var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
     
         if(machine_name == "" || validateInput.test(machine_name) == true) {
@@ -596,22 +595,15 @@ module.exports = () => {
             return sendRequestDataClient('machine_name');
         }
     
-        if(conservation_state == "" || validateInput.test(conservation_state) == true) {
-            req.flash('error', 'Estado de conservação inválido');
-            return sendRequestDataClient('conservation_state');
-        }
-    
         function sendRequestDataClient(input) {
             return res.render('machines/add.html', {
                 machine_name: machine_name,
-                conservation_state: conservation_state,
                 input: input,
             });
         }
     
         Machine.create({
-            machine_name: machine_name,
-            conservation_state: conservation_state,
+            machine_name: machine_name
         }).then(function() {
             req.flash('success', 'Máquina cadastrada com sucesso');
             res.redirect('/admin/machines');
@@ -636,7 +628,6 @@ module.exports = () => {
             }
             res.render('machines/edit.html', {
                 machine_name: machine.machine_name,
-                conservation_state: machine.conservation_state,
                 id: id
             });
         })
@@ -646,7 +637,6 @@ module.exports = () => {
         var id = req.params.id;
     
         var machine_name = req.body.machine_name;
-        var conservation_state = req.body.conservation_state;
         var validateInput = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
     
         if(machine_name == "" || validateInput.test(machine_name) == true) {
@@ -654,23 +644,16 @@ module.exports = () => {
             return sendRequestDataClient('machine_name');
         }
     
-        if(conservation_state == "" || validateInput.test(conservation_state) == true) {
-            req.flash('error', 'Estado de conservação inválido');
-            return sendRequestDataClient('conservation_state');
-        }
-    
         function sendRequestDataClient(input) {
             return res.render('machines/edit.html', {
                 machine_name: machine_name,
-                conservation_state: conservation_state,
                 input: input,
                 id: id
             });
         }
     
         Machine.update({
-            machine_name: machine_name,
-            conservation_state: conservation_state
+            machine_name: machine_name
             }, 
             {
                 where: {
@@ -852,6 +835,7 @@ module.exports = () => {
                 var serviceType = req.body.servicetype;
                 var machineType = req.body.machinetype;
                 var orderDescription = req.body.orderdescription;
+                var conservationStatus = req.body.conservationstatus;
 
                 Client.findOne({where:{id: clientName}}).then((client) => {
                     Machine.findOne({where:{id: machineType}}).then((machine) => {
@@ -871,6 +855,11 @@ module.exports = () => {
                             req.flash('error', 'Nome da máquina inválida!');
                             return sendRequestData('machineType');
                         }
+
+                        if(conservationStatus == "" || validateInput.test(conservationStatus) == true) {
+                            req.flash('error', 'Estado de conservação da máquina inválida!');
+                            return sendRequestData('conservationStatus');
+                        }
     
                         if(orderDescription == "" || validateInput.test(orderDescription) == true) {
                             req.flash('error', 'Descrição do pedido inválida!');
@@ -883,6 +872,7 @@ module.exports = () => {
                                 service: serviceType,
                                 machineid: machineType,
                                 order: orderDescription,
+                                conservation: conservationStatus,
                                 input: input,
                                 clients: clients,
                                 machines: machines,
@@ -903,7 +893,8 @@ module.exports = () => {
                             clientId: clientName,
                             service_type: serviceType,
                             machineId: machineType,
-                            service_description: orderDescription
+                            service_description: orderDescription,
+                            conservation_status: conservationStatus
                         }).then(function() {
                             req.flash('success', 'Pedido cadastrado com sucesso');
                             res.redirect('/admin/orders');
@@ -954,6 +945,7 @@ module.exports = () => {
                         service: order.service_type,
                         description: order.service_description,
                         clientid: order.clientId,
+                        conservation: order.conservation_status,
                         name: order.client.username,
                         clients: clients,
                         machines: machines,
@@ -975,6 +967,7 @@ module.exports = () => {
                 var serviceType = req.body.servicetype;
                 var machineType = req.body.machinetype;
                 var orderDescription = req.body.orderdescription;
+                var conservationStatus = req.body.conservationstatus;
     
                 Client.findOne({where:{id: clientName}}).then((client) => {
                     Machine.findOne({where:{id: machineType}}).then((machine) => {
@@ -994,6 +987,11 @@ module.exports = () => {
                             req.flash('error', 'Nome da máquina inválida!');
                             return sendRequestData('machineType');
                         }
+
+                        if(conservationStatus == "" || validateInput.test(conservationStatus) == true) {
+                            req.flash('error', 'Estado de conservação da máquina inválida!');
+                            return sendRequestData('conservationStatus');
+                        }
     
                         if(orderDescription == "" || validateInput.test(orderDescription) == true) {
                             req.flash('error', 'Descrição do pedido inválida!');
@@ -1006,6 +1004,7 @@ module.exports = () => {
                                 service: serviceType,
                                 machineid: machineType,
                                 description: orderDescription,
+                                conservation: conservationStatus,
                                 input: input,
                                 clients: clients,
                                 machines: machines,
@@ -1019,7 +1018,8 @@ module.exports = () => {
                             clientId: clientName,
                             service_type: serviceType,
                             machineId: machineType,
-                            service_description: orderDescription
+                            service_description: orderDescription,
+                            conservation_status: conservationStatus
                         }, {
                             where: {
                                 id: id

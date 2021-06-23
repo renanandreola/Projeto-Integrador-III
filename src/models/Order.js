@@ -11,6 +11,9 @@ const Order = db.sequelize.define('orders', {
     },
     service_description: {
         type: db.Sequelize.TEXT
+    },
+    conservation_status: {
+        type: db.Sequelize.STRING
     }
 });
 
