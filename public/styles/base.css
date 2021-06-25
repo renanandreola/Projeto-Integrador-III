@@ -319,3 +319,34 @@ a.navigation-item:hover {
     margin: 0 auto;
     margin-bottom: 20px;
 }
+
+.logo {
+    margin-top: 20px;
+    width: 500px;
+}
+
+.logged {
+    padding: 3.5px;
+    padding-right: 6px;
+    cursor: pointer;
+    float: right;
+    margin-right: 50px;
+    color: rgb(63, 63, 63);
+}
+
+.logged img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: solid 0.5px rgb(143, 143, 143);
+}
+
+.logged:hover {
+    padding: 2.5px;
+    padding-right: 5px;
+    cursor: pointer;
+    border: solid 1px rgb(141, 141, 141);
+    border-radius: 10px;
+    text-decoration: none;
+    color: rgb(63, 63, 63);
+}

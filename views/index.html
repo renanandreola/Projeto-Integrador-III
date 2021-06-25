@@ -11,17 +11,22 @@
 {% block content %}
 <div class="index-content">
   <div class="title-index">
-    <span class="title">LTMAQ LAZZAROTTO</span>
+    <img src="/img/logo-compact.jpg" draggable="false" class="logo" alt="LTMAQ LAZZAROTTO">
   </div>
   <br>
   <hr>
-  <br>
   <div class="content-index">
-    <span class="content-span">Bem vindo administrador!</span>
+    <span class="content-span">Bem vindo {{user.username}}!</span>
     <span class="content-span">Tenha aqui um melhor controle de sua empresa!</span>
-  <a href="/admin/logout" >
-    <button class="logout"> Deslogar </button> 
-  </a> 
+    
+    <br>
+    <hr>
+
+    <span class="content-span-left"><strong>Informações Gerais:</strong></span>
+    <br>
+    <span class="content-span-left"><strong>Clientes: </strong>{{quantityClients}} clientes cadastrados ({{newClients}} novos nos últimos 7 dias)</span>
+    <span class="content-span-left"><strong>Pedidos: </strong>{{quantityOrders}} pedidos cadastrados ({{newOrders}} novos nos últimos 7 dias)</span>
+    <span class="content-span-left"><strong>Máquinas: </strong>{{quantityMachines}} máquinas cadastradas ({{newMachines}} novas nos últimos 7 dias)</span>
   </div>
 </div>
 

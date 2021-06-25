@@ -12,9 +12,6 @@ const User = db.sequelize.define('users', {
     },
     type: {
         type: db.Sequelize.STRING
-    },
-    last_login: {
-        type: db.Sequelize.DATE
     }
 });
 

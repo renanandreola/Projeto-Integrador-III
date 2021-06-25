@@ -65,9 +65,51 @@ module.exports = () => {
     });
 
     //PRINCIPAL
-    app.get('/admin', isAdmin, (req, res) => {
-        res.render('index.html');
-        // console.log(req);
+    app.get('/admin', isAdmin, async (req, res) => {
+        Client.count().then((quantityClients) => {
+            Machine.count().then((quantityMachines) => {
+                Order.count().then((quantityOrders) => {
+
+                    //Calc actual date - 7 (to get a week ago)
+                    var date = new Date();
+                    date.setDate(date.getDate() - 7);
+
+                    Client.count({
+                        where: {
+                            createdAt: {
+                                [Op.gte]: date
+                            }
+                        }
+                    }).then((newClients) => {
+                        Machine.count({
+                            where: {
+                                createdAt: {
+                                    [Op.gte]: date
+                                }
+                            }
+                        }).then((newMachines) => {
+                            Order.count({
+                                where: {
+                                    createdAt: {
+                                        [Op.gte]: date
+                                    }
+                                }
+                            }).then((newOrders) => {
+                                res.render('index.html', {
+                                    quantityClients: quantityClients,
+                                    quantityMachines: quantityMachines,
+                                    quantityOrders: quantityOrders,
+                                    user: req.user,
+                                    newClients: newClients,
+                                    newMachines: newMachines,
+                                    newOrders: newOrders
+                                });
+                            })
+                        })
+                    });
+                });
+            });
+        });
     });
     
     app.get('/admin/login', (req, res) => {
@@ -212,15 +254,10 @@ module.exports = () => {
         var validateInput2 = /[@!#$%^&*()='+_"?°~`<>{}\\]/;
         var regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     
-        if(name == "" || validateInput.test(name) == true) {
+        if(name == "" || validateInput.test(name) == true || name.length < 3 || name > 255) {
             req.flash('error', 'Nome do cliente inválido');
             return sendRequestDataClient('name');
         }
-    
-        // if(lastname == "" || validateInput.test(lastname) == true) {
-        //     req.flash('error', 'Sobrenome do cliente inválido');
-        //     return sendRequestDataClient('lastname');
-        // }
     
         if(email == "" || regexEmail.test(email) == false) {
             req.flash('error', 'E-mail do cliente inválido');
